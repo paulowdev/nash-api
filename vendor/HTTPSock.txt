@@ -1,0 +1,2 @@
+Fonte:
+http://www.phpclasses.org/package/3659-PHP-Send-HTTP-requests-to-a-Web-server-using-sockets.html
