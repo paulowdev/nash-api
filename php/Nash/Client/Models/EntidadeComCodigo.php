@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-require_once dirname(realpath(__FILE__)) .'/Entidade.php';
+require_once dirname(realpath(__FILE__)) . '/Entidade.php';
 
 /**
  * Description of EntidadeDaEmpresa
@@ -14,9 +14,10 @@ require_once dirname(realpath(__FILE__)) .'/Entidade.php';
  * @author geanribeiro
  */
 class EntidadeComCodigo extends Entidade {
+
     public $Codigo;
     public $CodigoNoUltimoNivel;
-    
+
     public function getCodigo() {
         return $this->Codigo;
     }
@@ -34,6 +35,5 @@ class EntidadeComCodigo extends Entidade {
         $this->CodigoNoUltimoNivel = $CodigoNoUltimoNivel;
         return $this;
     }
-
 
 }

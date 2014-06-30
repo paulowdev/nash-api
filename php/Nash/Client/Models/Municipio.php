@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-require_once dirname(realpath(__FILE__)) .'/Entidade.php';
+require_once dirname(realpath(__FILE__)) . '/Entidade.php';
 
 /**
  * Description of Municipio
@@ -14,10 +14,21 @@ require_once dirname(realpath(__FILE__)) .'/Entidade.php';
  * @author geanribeiro
  */
 class Municipio extends Entidade {
+
     public $Nome;
     public $Codigo;
     public $UF;
-    
+    public $UF_id;
+
+    public function getUF_id() {
+        return $this->UF_id;
+    }
+
+    public function setUF_id($UF_id) {
+        $this->UF_id = $UF_id;
+        return $this;
+    }
+
     public function getNome() {
         return $this->Nome;
     }
@@ -42,6 +53,9 @@ class Municipio extends Entidade {
 
     public function setUF(UF $UF = null) {
         $this->UF = $UF;
+        if ($UF)
+            $this->UF_id = $UF->Id;
         return $this;
     }
+
 }

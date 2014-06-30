@@ -34,14 +34,56 @@ class ContaAReceberServiceTest extends PHPUnit_Framework_TestCase
         $this->session->logout();
     }
     
-    public function testCreate() {
+    ////// Testes //////
+    
+    public function testCriacaoDeContasAReceber() {
         $contaAReceber = $this->getContaAReceber();
+        
         $result = $this->object->create($contaAReceber);               
         
         $this->assertEquals(Result::SUCCESS, $result->getStatus());
         $this->assertNotNull($result->getModel());
-        $this->assertInstanceOf("ContaAReceber", $result->getModel());       
+        $this->assertInstanceOf("ContaAReceber", $result->getModel());
+        
+        return $result->getModel();
     }
+    
+    /**
+     * @depends testCriacaoDeContasAReceber
+     */
+    public function testAtualizacaoDeContasAReceber(ContaAReceber $contaAReceber) {
+        $contaAReceberAlterado = $this->object->read($contaAReceber->getId())->getModel();
+        $contaAReceberAlterado->setObservacao("Teste de alteração de contas a receber.");
+        $contaAReceberAlterado->getServicos()[0]->Valor = 2000;
+        $contaAReceberAlterado->getVencimentos()[0]->Valor = 2000;
+        $contaAReceberAlterado->getRateios()[0]->Valor = 2000;
+        
+        $result = $this->object->update($contaAReceberAlterado);
+        
+        $this->assertEquals(Result::SUCCESS, $result->getStatus());
+        $this->assertNotNull($result->getModel());
+        
+        $contaAReceberAlterado = $result->getModel();
+        
+        $this->assertInstanceOf("ContaAReceber", $contaAReceberAlterado);
+        $this->assertEquals("Teste de alteração de contas a receber.", $contaAReceberAlterado->getObservacao());
+        $this->assertEquals(2000, $contaAReceberAlterado->getServicos()[0]->Valor);
+        $this->assertEquals(2000, $contaAReceberAlterado->getVencimentos()[0]->Valor);
+        $this->assertEquals(2000, $contaAReceberAlterado->getRateios()[0]->Valor);
+        
+        return $contaAReceberAlterado;
+    }
+    
+    /**
+     * @depends testAtualizacaoDeContasAReceber
+     */
+    public function testExclusaoDeContasAReceber(ContaAReceber $contaAReceber) {
+        $result = $this->object->delete($contaAReceber->getId());
+        $this->assertEquals(Result::SUCCESS, $result->getStatus());
+    }
+    
+    
+    ////// Recursos //////    
     
     private function getContaAReceber() {
         $contaAReceber = new ContaAReceber();
@@ -54,7 +96,7 @@ class ContaAReceberServiceTest extends PHPUnit_Framework_TestCase
         $contaAReceber->setConta($this->getConta(TipoConta::Financeira));
         $contaAReceber->setServicos($this->getServicos());    
         $contaAReceber->setVencimentos($this->getVencimentosAReceber());
-        $contaAReceber->setRateios($this->getReceita());                                
+        $contaAReceber->setRateios($this->getReceitas());
         
         return $contaAReceber;
     }
@@ -67,7 +109,7 @@ class ContaAReceberServiceTest extends PHPUnit_Framework_TestCase
         return $empresa;
     }
     
-    private function getReceita(){       
+    private function getReceitas(){       
         $rateio = new Rateio();
         $rateio->setUnidadeNegocio($this->getUnidadeNegocio());
         $rateio->setCentro($this->getCentroResultados());

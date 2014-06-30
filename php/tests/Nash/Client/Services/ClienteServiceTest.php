@@ -64,7 +64,6 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
     {
         $cliente = $this->getCliente();
         $result = $this->object->create($cliente);
-        var_dump($result);
         
         $this->assertEquals(Result::SUCCESS, $result->getStatus());
         $this->assertNotNull($result->getModel());
@@ -84,7 +83,7 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf("Cliente", $result->getModel());
         $this->assertEquals($cliente->getId(), $result->getModel()->getId());
     }
-    
+
     /**
      * @covers Nash\Client\Services\ClienteService::update
      * @param \Nash\Client\Models\Cliente $cliente
@@ -92,21 +91,28 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
      */
     public function testUpdate(Cliente $cliente) {
         $cliente->setNomeFantasia("Test Update!");
-        $result = $this->object->update($cliente);
+        $cliente->setRetencaoISS(RetencaoISS::Retem);
+        $cliente->setComplemento("complemento...");
+        $cliente->setInscricaoMunicipal("1234567");
         
+        $result = $this->object->update($cliente);
+
         $this->assertEquals(Result::SUCCESS, $result->getStatus());
         $this->assertNotNull($result->getModel());
         $this->assertInstanceOf("Cliente", $result->getModel());
         $this->assertEquals($cliente->getId(), $result->getModel()->getId());
-        $this->assertEquals("Test Update!", $result->getModel()->getNomeFantasia());
         
         $result = $this->object->read($cliente->getId());
-        
+
+
         $this->assertEquals(Result::SUCCESS, $result->getStatus());
         $this->assertNotNull($result->getModel());
         $this->assertInstanceOf("Cliente", $result->getModel());
         $this->assertEquals($cliente->getId(), $result->getModel()->getId());
         $this->assertEquals("Test Update!", $result->getModel()->getNomeFantasia());
+        $this->assertEquals(RetencaoISS::Retem, $result->getModel()->getRetencaoISS());
+        $this->assertEquals("complemento...", $result->getModel()->getComplemento());
+        $this->assertEquals("1234567", $result->getModel()->getInscricaoMunicipal());
     }
     
     /**
@@ -135,13 +141,14 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
     
     private function getCliente() {
         $cliente = new Cliente();
+        $cliente->setNomeFantasia("Nome do Cliente");
         $cliente->setRazaoSocial("Nome do Cliente");
-        $cliente->setCPFCNPJ("00000000000");
+        $cliente->setCPFCNPJ("00000000000000");
         $cliente->setLogradouro("Rua xxx do yyy");
         
         //lookups
-        $cliente->setMunicipio($this->getMunicipio());
-        $cliente->setConta($this->getConta());
+        $cliente->setMunicipio_id($this->getMunicipio()->Id);
+        $cliente->setConta_id($this->getConta()->Id);
         
         return $cliente;
     }

@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -11,8 +11,7 @@
  *
  * @author elvislima
  */
-
-class UnidadeNegocio extends EntidadeComCodigo {    
+class UnidadeNegocio extends EntidadeComCodigo {
 
     public $Codigo;
     public $CNPJ;
@@ -25,20 +24,31 @@ class UnidadeNegocio extends EntidadeComCodigo {
     public $Complemento;
     public $Bairro;
     public $Municipio;
+    public $Municipio_id;
     public $Serie;
     public $CEP;
     public $Telefone;
-    public $Email;    
+    public $Email;
     public $RegimeEspecialTributacao;
     public $AliquotaIR;
     public $AliquotaISS;
     public $OptantePeloSimplesNacional;
     public $IncetivadorCultural;
     public $RamoAtividade;
+
     //protected $ChaveLicenca1; ?
     //protected $ChaveLicenca2; ?
     //protected $ExigibilidadeISS; ?
-    
+
+    public function getMunicipio_id() {
+        return $this->Municipio_id;
+    }
+
+    public function setMunicipio_id($Municipio_id) {
+        $this->Municipio_id = $Municipio_id;
+        return $this;
+    }
+
     public function getCodigo() {
         return $this->Codigo;
     }
@@ -98,7 +108,7 @@ class UnidadeNegocio extends EntidadeComCodigo {
     public function getEmail() {
         return $this->Email;
     }
-    
+
     public function getRegimeEspecialTributacao() {
         return $this->RegimeEspecialTributacao;
     }
@@ -175,6 +185,9 @@ class UnidadeNegocio extends EntidadeComCodigo {
 
     public function setMunicipio(Municipio $Municipio = null) {
         $this->Municipio = $Municipio;
+        if ($Municipio) {
+            $this->Municipio_id = $Municipio->Id;
+        }
         return $this;
     }
 
@@ -196,7 +209,7 @@ class UnidadeNegocio extends EntidadeComCodigo {
     public function setEmail($Email) {
         $this->Email = $Email;
         return $this;
-    }   
+    }
 
     public function setRegimeEspecialTributacao($RegimeEspecialTributacao) {
         $this->RegimeEspecialTributacao = $RegimeEspecialTributacao;
@@ -227,5 +240,5 @@ class UnidadeNegocio extends EntidadeComCodigo {
         $this->RamoAtividade = $RamoAtividade;
         return $this;
     }
- 
+
 }

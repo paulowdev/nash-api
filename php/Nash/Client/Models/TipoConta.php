@@ -21,7 +21,7 @@ class TipoConta extends BaseEnum {
     const Fornecedor = 5;
     const Ativo = 6;
     const Passivo = 7;
-    
+    const Resultado = 8;
     public static function getType() {
         return get_class();
     }

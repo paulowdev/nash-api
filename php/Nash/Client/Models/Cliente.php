@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-require_once dirname(realpath(__FILE__)) .'/Participante.php';
+require_once dirname(realpath(__FILE__)) . '/Participante.php';
 
 /**
  * Description of Cliente
@@ -14,32 +14,40 @@ require_once dirname(realpath(__FILE__)) .'/Participante.php';
  * @author geanribeiro
  */
 class Cliente extends Participante {
+
     public $Codigo;
     public $InscricaoMunicipal;
-    public $RazaoSocial;
-    public $RetemISS;
-    public $NomeFantasia;
     public $Conta;
+    public $Conta_id;
     public $ContaPadrao;
-    
+    public $ContaPadrao_id;
+    public $RetencaoISS;
+
+    public function getContaPadrao_id() {
+        return $this->ContaPadrao_id;
+    }
+
+    public function setContaPadrao_id($ContaPadrao_id) {
+        $this->ContaPadrao_id = $ContaPadrao_id;
+        return $this;
+    }
+
+    public function getRetencaoISS() {
+        return $this->RetencaoISS;
+    }
+
+    public function setRetencaoISS($RetencaoISS = null) {
+        RetencaoISS::check(RetencaoISS::getType(), $RetencaoISS);
+        $this->RetencaoISS = RetencaoISS::getValue(RetencaoISS::getType(), $RetencaoISS);
+        return $this;
+    }
+
     public function getCodigo() {
         return $this->Codigo;
     }
 
     public function getInscricaoMunicipal() {
         return $this->InscricaoMunicipal;
-    }
-
-    public function getRazaoSocial() {
-        return $this->RazaoSocial;
-    }
-
-    public function getRetemISS() {
-        return $this->RetemISS;
-    }
-
-    public function getNomeFantasia() {
-        return $this->NomeFantasia;
     }
 
     public function getConta() {
@@ -60,28 +68,27 @@ class Cliente extends Participante {
         return $this;
     }
 
-    public function setRazaoSocial($RazaoSocial) {
-        $this->RazaoSocial = $RazaoSocial;
-        return $this;
-    }
-
-    public function setRetemISS($RetemISS) {
-        $this->RetemISS = $RetemISS;
-        return $this;
-    }
-
-    public function setNomeFantasia($NomeFantasia) {
-        $this->NomeFantasia = $NomeFantasia;
-        return $this;
-    }
-
     public function setConta(Conta $Conta = null) {
         $this->Conta = $Conta;
+        if ($Conta)
+            $this->Conta_id = $Conta->Id;
         return $this;
     }
 
     public function setContaPadrao(Conta $ContaPadrao = null) {
         $this->ContaPadrao = $ContaPadrao;
+        if ($ContaPadrao)
+            $this->ContaPadrao_id = $ContaPadrao->Id;
         return $this;
     }
+
+    public function getConta_id() {
+        return $this->Conta_id;
+    }
+
+    public function setConta_id($Conta_id) {
+        $this->Conta_id = $Conta_id;
+        return $this;
+    }
+
 }

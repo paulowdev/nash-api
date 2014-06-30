@@ -41,8 +41,8 @@ class StringExTest extends PHPUnit_Framework_TestCase
     
     public function testSimplify() {
         $strAccents = "áÀãçéèÕü";
-        $noAccents = StringEx::simplify($strAccents);
+        $simplify = StringEx::simplify($strAccents);
         
-        $this->assertEquals("aaaceeou", $noAccents);
+        $this->assertEquals("aaaceeou", $simplify);
     }
 }

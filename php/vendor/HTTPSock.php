@@ -70,7 +70,7 @@ class HTTPSock
         $this->connect();
 
         $header = $this->assemble_header($HTTP_Type, $this->host, $this->path, $HTTPPostVars, $headers);
-
+        
         fwrite($this->socket, $header);
         //socket_write($this->socket, $header, strlen($header));
 
@@ -79,9 +79,10 @@ class HTTPSock
 
         if (array_key_exists('Content-Encoding', $this->headers) && $this->headers['Content-Encoding'] == "gzip")
         {
-            $this->content = gzinflate(substr($this->content, 10));
+            $content = gzinflate(substr($this->content, 10));
+            $this->content = $content;
         }
-
+        
         return $this->content;
     }
     
@@ -167,7 +168,7 @@ class HTTPSock
         $hostPrefix = strcmp($this->service, "https") == 0 ? "ssl://" : "";
         $errorMessage = "";
         $errorCode = null;
-        $this->socket = fsockopen("{$hostPrefix}{$this->host}", $this->port, $errorCode, $errorMessage);
+        $this->socket = fsockopen("{$hostPrefix}{$this->numerical_host}", $this->port, $errorCode, $errorMessage);
         
         if (!$this->socket) {
             $this->new_error($errorMessage);
@@ -201,13 +202,13 @@ class HTTPSock
         $postData = "";
         $HTTP_Type = strtoupper($HTTP_Type);
 
-        $header = "{$HTTP_Type} {$path} HTTP/1.1\r\n";
+        $header = "{$HTTP_Type} {$path} HTTP/1.0\r\n";
         $header .= "Host: " . $host . "\r\n";
 
         $params['User-Agent'] = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1";
         $params['Accept'] = "application/json,text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
-        $params['Accept-Language'] = "en-us,en;q=0.5";
-        $params['Accept-Encoding'] = "gzip,deflate";
+        $params['Accept-Language'] = "pt-BR,pt;q=0.8,en-US;q=0.6,en;q=0.4,fr;q=0.2,es;q=0.2";
+        $params['Accept-Encoding'] = "gzip,deflate,sdch";
         $params['Accept-Charset'] = "ISO-8859-1,utf-8;q=0.7,*;q=0.7";
         $params['Keep-Alive'] = "300";
         $params['Connection'] = "Close";
@@ -241,17 +242,15 @@ class HTTPSock
                 {
                     if (!is_null($value)) {
                         $key = urlencode($key);
-                        $value = urlencode($value);
+                        $value = is_bool($value) ? ($value ? "true" : "false") : urlencode($value);
 
-                        if ($value) {
-                            $postData .= $value === true ? "{$key}=true&" : "{$key}={$value}&";
-                        }
+                        if ($value) $postData .= "{$key}={$value}&";
                     }
                 }
 
                 $postData = substr($postData, 0, strlen($postData) - 1);
             } elseif ($this->contentType == HTTPSock::CONTENT_TYPE_JSON) {
-                $postData = $HTTPPostVars;
+                $postData = str_replace("\/", "/", $HTTPPostVars);
             }
             
             if (!is_string($postData)) $postData = "";

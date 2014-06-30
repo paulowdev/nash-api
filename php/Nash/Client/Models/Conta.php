@@ -6,10 +6,10 @@
  * and open the template in the editor.
  */
 
-require_once dirname(realpath(__FILE__)) .'/EntidadeComCodigo.php';
-require_once dirname(realpath(__FILE__)) .'/TipoConta.php';
-require_once dirname(realpath(__FILE__)) .'/TipoNatureza.php';
-require_once dirname(realpath(__FILE__)) .'/TipoCalculo.php';
+require_once dirname(realpath(__FILE__)) . '/EntidadeComCodigo.php';
+require_once dirname(realpath(__FILE__)) . '/TipoConta.php';
+require_once dirname(realpath(__FILE__)) . '/TipoNatureza.php';
+require_once dirname(realpath(__FILE__)) . '/TipoCalculo.php';
 
 /**
  * Description of Conta
@@ -17,12 +17,23 @@ require_once dirname(realpath(__FILE__)) .'/TipoCalculo.php';
  * @author geanribeiro
  */
 class Conta extends EntidadeComCodigo {
+
     public $Tipo;
     public $Nome;
     public $Calculo;
     public $Natureza;
     public $Grupo;
-    
+    public $Grupo_id;
+
+    public function getGrupo_id() {
+        return $this->Grupo_id;
+    }
+
+    public function setGrupo_id($Grupo_id) {
+        $this->Grupo_id = $Grupo_id;
+        return $this;
+    }
+
     public function getTipo() {
         return $this->Tipo;
     }
@@ -68,8 +79,9 @@ class Conta extends EntidadeComCodigo {
 
     public function setGrupo(Conta $Grupo = null) {
         $this->Grupo = $Grupo;
+        if ($Grupo)
+            $this->Grupo_id = $Grupo->Id;
         return $this;
     }
-
 
 }

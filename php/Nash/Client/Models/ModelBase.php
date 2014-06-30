@@ -12,10 +12,12 @@
  * @author geanribeiro
  */
 class ModelBase {
+
     public function toJson() {
-        return json_encode(get_object_vars($this));
+        $data = ArrayEx::transform(get_object_vars($this));
+        return json_encode($data);
     }
-    
+
     public function __construct($data = null) {
         if (!is_null($data)) {
             if ($data instanceof stdClass) {
@@ -27,42 +29,44 @@ class ModelBase {
             }
         }
     }
-    
+
     public function loadFromStdClass($data) {
         $vars = get_object_vars($data);
         $this->loadFromArray($vars);
     }
-    
+
     public function loadFromArray($data) {
-        foreach($data as $property => $value) {
+        foreach ($data as $property => $value) {
             if (strpos($property, ".")) {
                 $parts = explode(".", $property);
                 $property = array_shift($parts);
                 $value = $this->getValueStructure($parts, $value);
             }
-            $setter = "set" . ucfirst($property);
+
+            $methodSet = "set" . ucfirst($property);
             $getter = "get" . ucfirst($property);
-            if (method_exists($this, $setter)) {
-                $setterValue = $this->getValue($getter, $setter, $value);
-                $this->$setter($setterValue);
+            
+            if (method_exists($this, $methodSet)) {
+                $setterValue = $this->getValue($getter, $methodSet, $value);
+                $this->$methodSet($setterValue);
             }
         }
     }
-    
+
     private function getValue($getter, $setter, $value) {
         $setterValue = $value;
         if (is_object($value) || is_array($value)) {
             if (is_array($value) && method_exists($this, $getter) && !is_null($this->$getter())) {
                 $this->$getter()->loadFromArray($value);
                 $setterValue = $this->$getter();
-            } else {
-                $parameterClassName = $this->getParameterClassName($setter);
-                $setterValue = new $parameterClassName($value);
+            } else if (strcmp($parameterTypeName = $this->getParameterClassName($setter), "array")) {
+                $parameterTypeName = $this->getParameterClassName($setter);
+                $setterValue = new $parameterTypeName($value);
             }
         }
         return $setterValue;
     }
-    
+
     private function getParameterClassName($setter) {
         $object = new ReflectionObject($this);
         $className = $object->getName();
@@ -70,17 +74,17 @@ class ModelBase {
         $method = new ReflectionMethod($className, $setter);
         $parameter = $method->getParameters();
         $parameter = $parameter[0];
-        
+
         $parameterClass = $parameter->getClass();
 
-        if (is_null($parameterClass)) {
+        if (!$parameter->isArray() && is_null($parameterClass)) {
             throw new Exception("O paramentro \"\${$parameter->getName()}\" do metodo \"{$className}->{$setter}\" nao possui um tipo definido!");
         }
 
-        $parameterClassName = $parameterClass->getName();
+        $parameterClassName = $parameter->isArray() ? "array" : $parameterClass->getName();
         return $parameterClassName;
     }
-    
+
     private function getValueStructure($parts, $value) {
         $valueStructure = array();
         $valueElement = &$valueStructure;
@@ -95,4 +99,5 @@ class ModelBase {
         }
         return $valueStructure;
     }
+
 }

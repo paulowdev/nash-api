@@ -32,7 +32,13 @@ class BaseEnumTest extends PHPUnit_Framework_TestCase
         $value = MyEnumTest::getValue(MyEnumTest::getType(), 1);
         $this->assertEquals(1, $value);
     }
-    
+
+    public function testOla(){
+        $ola = 1;
+        $truco = 1;
+        $this->assertEquals($ola,$truco);
+    }
+
     public function testPossoRecuperarOTituloAPartirDoValor()
     {
         $title = MyEnumTest::getTitle(MyEnumTest::getType(), 2);

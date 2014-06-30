@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -11,15 +11,44 @@
  *
  * @author elvislima
  */
-
-class Rateio extends EntidadeComCodigo {    
+class Rateio extends EntidadeComCodigo {
 
     public $UnidadeNegocio;
+    public $UnidadeNegocio_id;
     public $Conta;
+    public $Conta_id;
     public $Centro;
+    public $Centro_id;
     public $Valor;
     public $Percentual;
-    
+
+    public function getUnidadeNegocio_id() {
+        return $this->UnidadeNegocio_id;
+    }
+
+    public function getConta_id() {
+        return $this->Conta_id;
+    }
+
+    public function getCentro_id() {
+        return $this->Centro_id;
+    }
+
+    public function setUnidadeNegocio_id($UnidadeNegocio_id) {
+        $this->UnidadeNegocio_id = $UnidadeNegocio_id;
+        return $this;
+    }
+
+    public function setConta_id($Conta_id) {
+        $this->Conta_id = $Conta_id;
+        return $this;
+    }
+
+    public function setCentro_id($Centro_id) {
+        $this->Centro_id = $Centro_id;
+        return $this;
+    }
+
     public function getPercentual() {
         return $this->Percentual;
     }
@@ -47,16 +76,21 @@ class Rateio extends EntidadeComCodigo {
 
     public function setUnidadeNegocio(UnidadeNegocio $UnidadeNegocio) {
         $this->UnidadeNegocio = $UnidadeNegocio;
+        $this->UnidadeNegocio_id = $UnidadeNegocio->Id;
         return $this;
     }
 
-    public function setConta($Conta) {
+    public function setConta(Conta $Conta) {
         $this->Conta = $Conta;
+        if ($Conta)
+            $this->Conta_id = $Conta->Id;
         return $this;
     }
 
     public function setCentro(CentroResultados $CentroResultados) {
         $this->Centro = $CentroResultados;
+        if ($CentroResultados)
+            $this->Centro_id = $CentroResultados->Id;
         return $this;
     }
 
@@ -64,4 +98,5 @@ class Rateio extends EntidadeComCodigo {
         $this->Valor = $Valor;
         return $this;
     }
+
 }

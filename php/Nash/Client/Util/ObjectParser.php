@@ -27,17 +27,29 @@ class ObjectParser {
     
     private static function getProperties($object) {
         $reflect = new ReflectionClass($object);
-        $properties = $reflect->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED);
+        $properties = $reflect->getProperties(ReflectionProperty::IS_PUBLIC | ReflectionProperty::IS_PROTECTED | ReflectionProperty::IS_PRIVATE);
         return $properties;
     }
     
     private static function loadArray($object, &$result, $prefix = "") {
+        $reflect = new ReflectionClass($object);
+        $typeName = $reflect->getName();
         $properties = ObjectParser::getProperties($object);
         if (is_array($properties)) {
             foreach ($properties as $key => $prop) {
-                $methodName = "get" . ucfirst($prop->getName());
-                $value = $object->$methodName();
-                $name = $prefix . $prop->getName();
+                $propertyName = $prop->getName();
+                $propNameCamelCase = ucfirst($propertyName);
+                $getMethodName = "get$propNameCamelCase";
+                $setMethodName = "set$propNameCamelCase";
+                $setIdMethodName = "{$setMethodName}_id";
+                $setMethodParameter = new ReflectionParameter(array($typeName, $setMethodName), 0);
+                
+                if($reflect->getMethod($setMethodName) && $setMethodParameter->getClass() && method_exists($object, $setIdMethodName)){
+                    continue;
+                }
+                
+                $value = $object->$getMethodName();
+                $name = $prefix . $propertyName;
 
                 if (is_object($value)) {
                     ObjectParser::loadArray($value, $result, "$name.");

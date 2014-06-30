@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-require_once dirname(realpath(__FILE__)) .'/ModelBase.php';
+require_once dirname(realpath(__FILE__)) . '/ModelBase.php';
 
 /**
  * Description of Empresa
@@ -14,13 +14,34 @@ require_once dirname(realpath(__FILE__)) .'/ModelBase.php';
  * @author geanribeiro
  */
 class ConfiguracaoEmpresa extends ModelBase {
+
     public $Nome;
     public $MascaraPlanoContas;
     public $MascaraCentroResultados;
     public $PodeAlterarMascaraPlanoContas;
     public $PodeAlterarMascaraCentroResultados;
     public $ContaCliente;
+    public $ContaCliente_id;
     public $ContaFornecedor;
+    public $ContaFornecedor_id;
+
+    public function getContaCliente_id() {
+        return $this->ContaCliente_id;
+    }
+
+    public function getContaFornecedor_id() {
+        return $this->ContaFornecedor_id;
+    }
+
+    public function setContaCliente_id($ContaCliente_id) {
+        $this->ContaCliente_id = $ContaCliente_id;
+        return $this;
+    }
+
+    public function setContaFornecedor_id($ContaFornecedor_id) {
+        $this->ContaFornecedor_id = $ContaFornecedor_id;
+        return $this;
+    }
 
     public function getNome() {
         return $this->Nome;
@@ -77,11 +98,16 @@ class ConfiguracaoEmpresa extends ModelBase {
 
     public function setContaCliente(Conta $ContaCliente = null) {
         $this->ContaCliente = $ContaCliente;
+        if ($ContaCliente)
+            $this->ContaCliente_id = $ContaCliente->Id;
         return $this;
     }
 
     public function setContaFornecedor(Conta $ContaFornecedor = null) {
         $this->ContaFornecedor = $ContaFornecedor;
+        if ($ContaFornecedor)
+            $this->ContaFornecedor_id = $ContaFornecedor->Id;
         return $this;
     }
+
 }

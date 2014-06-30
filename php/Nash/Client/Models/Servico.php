@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -11,15 +11,15 @@
  *
  * @author elvislima
  */
+class Servico extends EntidadeComCodigo {
 
-class Servico extends EntidadeComCodigo {    
-    
     public $Codigo;
     public $DescricaoFiscalServico;
+    public $DescricaoFiscalServico_id;
     public $ParametrizacoesDeServicosPorMunicipio;
     public $ConfiguracaoSituacaoTributariaISS;
     public $Nome;
-    
+
     public function getCodigo() {
         return $this->Codigo;
     }
@@ -47,6 +47,9 @@ class Servico extends EntidadeComCodigo {
 
     public function setDescricaoFiscalServico(DescricaoFiscalServico $DescricaoFiscalServico = null) {
         $this->DescricaoFiscalServico = $DescricaoFiscalServico;
+        if ($DescricaoFiscalServico) {
+            $this->DescricaoFiscalServico_id = $DescricaoFiscalServico->Id;
+        }
         return $this;
     }
 
@@ -64,5 +67,5 @@ class Servico extends EntidadeComCodigo {
         $this->Nome = $Nome;
         return $this;
     }
-}
 
+}

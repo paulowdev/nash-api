@@ -19,11 +19,13 @@ class Result {
     private $status;
     private $erros = array();
     private $model = NULL;
+    private $detail = NULL;
 
-    public function __construct($status, $model, $erros = array()) {
+    public function __construct($status, $model, $erros = array(), $detail = null) {
         $this->status = $status;
         $this->erros = $erros;
         $this->model = $model;
+        $this->detail = $detail;
     }
     
     public function getStatus() {
@@ -50,6 +52,15 @@ class Result {
 
     public function setModel($model) {
         $this->model = $model;
+        return $this;
+    }
+    
+    public function getDetail() {
+        return $this->detail;
+    }
+    
+    public function setDetail($detail) {
+        $this->detail = $detail;
         return $this;
     }
 }

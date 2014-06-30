@@ -120,21 +120,37 @@ class NashEarlySession extends AbstractSession {
     }
     
     protected function get400() {
-        $erros = json_decode($this->getHttpObject()->getContent(), true);
+        
+        $content = trim($this->getHttpObject()->getContent());
+        
+        $erros = json_decode($content, true);
         $erro = array();
 
         if (is_array($erros)) {
-            foreach ($erros["Erros"] as $key => $value) {
-                array_push($erro, "{$key} - {$value}");
+            if (key_exists("Erros", $erros) && is_array($erros["Erros"])){
+                foreach ($erros["Erros"] as $key => $value) {
+                    array_push($erro, "{$key} - {$value}");
+                }
+            } else if (key_exists("Erros", $erros)) {
+                array_push($erro, $erros["Erros"]);
             }
+            
+            if (key_exists("Mensagem", $erros) && is_array($erros["Mensagem"])){
+                foreach ($erros["Mensagem"] as $key => $value) {
+                    array_push($erro, "{$key} - {$value}");
+                }
+            } else if (key_exists("Mensagem", $erros)){
+                array_push($erro, $erros["Mensagem"]);
+            }
+            
         } else {
-            array_push($erro, $erros);
+            array_push($erro, $content);
         }
 
         return new Result(Result::ERROR, NULL, $erro);
     }
     
     protected function get500() {
-        return new Result(Result::REQUEST_FAIL, NULL, array("Falha na requisição!"));
+        return new Result(Result::REQUEST_FAIL, NULL, array("Falha na requisição!"), $this->getHttpObject()->getContent());
     }
 }

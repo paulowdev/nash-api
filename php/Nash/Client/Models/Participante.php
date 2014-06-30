@@ -6,20 +6,22 @@
  * and open the template in the editor.
  */
 
-require_once dirname(realpath(__FILE__)) .'/Entidade.php';
+require_once dirname(realpath(__FILE__)) . '/Entidade.php';
 
 /**
  * Description of Participante
  *
  * @author geanribeiro
  */
-class Participante extends Entidade{
+class Participante extends Entidade {
+
     public $ParticipanteId;
     public $CPFCNPJ;
     public $Logradouro;
     public $Numero;
     public $Bairro;
     public $Municipio;
+    public $Municipio_id;
     public $CEP;
     public $Complemento;
     public $Telefone;
@@ -27,7 +29,19 @@ class Participante extends Entidade{
     public $GerarConta;
     public $InformarContaMae;
     public $ContaMae;
-    
+    public $ContaMae_id;
+    public $NomeFantasia;
+    public $RazaoSocial;
+
+    public function getContaMae_id() {
+        return $this->ContaMae_id;
+    }
+
+    public function setContaMae_id($ContaMae_id) {
+        $this->ContaMae_id = $ContaMae_id;
+        return $this;
+    }
+
     public function getParticipanteId() {
         return $this->ParticipanteId;
     }
@@ -80,6 +94,14 @@ class Participante extends Entidade{
         return $this->ContaMae;
     }
 
+    public function getNomeFantasia() {
+        return $this->NomeFantasia;
+    }
+
+    public function getRazaoSocial() {
+        return $this->RazaoSocial;
+    }
+
     public function setParticipanteId($ParticipanteId) {
         $this->ParticipanteId = $ParticipanteId;
         return $this;
@@ -107,6 +129,8 @@ class Participante extends Entidade{
 
     public function setMunicipio(Municipio $Municipio = null) {
         $this->Municipio = $Municipio;
+        if ($Municipio)
+            $this->Municipio_id = $Municipio->Id;
         return $this;
     }
 
@@ -142,6 +166,28 @@ class Participante extends Entidade{
 
     public function setContaMae(Conta $ContaMae = null) {
         $this->ContaMae = $ContaMae;
+        if ($ContaMae)
+            $this->ContaMae_id = $ContaMae->Id;
         return $this;
     }
+
+    public function setNomeFantasia($NomeFantasia) {
+        $this->NomeFantasia = $NomeFantasia;
+        return $this;
+    }
+
+    public function setRazaoSocial($RazaoSocial) {
+        $this->RazaoSocial = $RazaoSocial;
+        return $this;
+    }
+
+    public function getMunicipio_id() {
+        return $this->Municipio_id;
+    }
+
+    public function setMunicipio_id($Municipio_id) {
+        $this->Municipio_id = $Municipio_id;
+        return $this;
+    }
+
 }

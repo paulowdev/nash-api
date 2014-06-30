@@ -46,7 +46,10 @@ abstract class AbstractCrudService implements ICrudService {
 
     public function retrieve($take, $skip, $query = "") {
        $q = is_null($query) || empty($query) || !$query ? "" : "q={$query}&";
-       $result = $this->session->get("/{$this->entityName()}/Grid?{$q}take={$take}&skip={$skip}&page=" . ($skip + 1) . "&pageSize={$take}");
+       $url = "/{$this->entityName()}/Grid?{$q}take={$take}&skip={$skip}&page=" . ($skip + 1) . "&pageSize={$take}";
+       
+       $url = str_replace("\"", "", $url);
+       $result = $this->session->get($url);
        return $this->parseListResult($result);
     }
 
@@ -58,6 +61,7 @@ abstract class AbstractCrudService implements ICrudService {
     protected function parseResult($result) {
         if ($result->getStatus() == Result::SUCCESS) {
             $entityClassName = $this->entityClassName();
+            
             $result->setModel(new $entityClassName($result->getModel()));
         }
         return $result;

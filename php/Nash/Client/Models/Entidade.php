@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-require_once dirname(realpath(__FILE__)) .'/ModelBase.php';
+require_once dirname(realpath(__FILE__)) . '/ModelBase.php';
 
 /**
  * Description of Entidade
@@ -14,9 +14,10 @@ require_once dirname(realpath(__FILE__)) .'/ModelBase.php';
  * @author geanribeiro
  */
 class Entidade extends ModelBase {
+
     public $Id;
     public $Inativo = false;
-    
+
     public function getId() {
         return $this->Id;
     }
@@ -34,4 +35,5 @@ class Entidade extends ModelBase {
         $this->Inativo = $Inativo;
         return $this;
     }
+
 }

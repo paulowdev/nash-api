@@ -55,25 +55,25 @@ class NashEarlySessionTest extends PHPUnit_Framework_TestCase
     }
     
     public function testCodigoDeResultadoQuandoServicoInvalido() {
-        $object = new NashEarlySession("http://srvaramis/nash/XYZ");
+        $object = new NashEarlySession(self::$config["servicePath"] . "/XYZ");
         $object->login(array("username" => "nash", "password" => "xxxxxx"));
         $this->assertEquals(ISession::SERVICE_NOT_FOUND, $object->getResultCode());
     }
-    
+
     public function testCodigoDeResultadoQuandoNaoForPossivelEfetuarAutenticacao() {
         $this->setExpectedException(
-          'Exception', utf8_decode('Este host não é conhecido.')
+          'Exception', 'getaddrinfo failed'
         );
-        
+
         $object = new NashEarlySession("http://nash12345676543234567.com.br");
         $object->login(array("username" => "nash", "password" => "xxxxxx"));
     }
-    
+
     public function testLogout() {
         $this->object->login(self::$config);
         $this->assertTrue($this->object->logout());
     }
-    
+
     public function testEstadoDoObjetoAposLogout () {
         $this->object->login(self::$config);
         $this->assertTrue($this->object->isAuthenticated());

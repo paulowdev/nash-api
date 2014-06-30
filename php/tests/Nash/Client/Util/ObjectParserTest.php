@@ -76,6 +76,44 @@ class ObjectParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("Gean", $arr["complexObject.singleObject.name"]);
         $this->assertEquals(26, $arr["complexObject.singleObject.idade"]);
     }
+    
+    public function testToArrayRemovePropriedadeComplexaQuePossuiPropriedadeId() {
+        $municipio = new MunicipioTestObject;        
+        $municipio->setId(1);
+        $municipio->setNome("Fortaleza");
+        $conta = new ContaTestObject;
+        $conta->setId(2);
+        $conta->setNome("Banco do Brasil");
+        
+        $rateio = new RateioTestObject;
+        $rateio->setMunicipio($municipio);
+        $rateio->setConta($conta);
+        
+        $arr = ObjectParser::toArray($rateio);
+        
+        $this->assertEquals(2, count($arr));
+        $this->assertEquals(1, $arr["Municipio_id"]);
+        $this->assertEquals(2, $arr["Conta_id"]);
+    }
+    
+    public function testToJsonRemovePropriedadeComplexaQuePossuiPropriedadeId() {
+        $municipio = new MunicipioTestObject;        
+        $municipio->setId(1);
+        $municipio->setNome("Fortaleza");
+        $conta = new ContaTestObject;
+        $conta->setId(2);
+        $conta->setNome("Banco do Brasil");
+        
+        $rateio = new RateioTestObject;
+        $rateio->setMunicipio($municipio);
+        $rateio->setConta($conta);
+        
+        $arr = ArrayEx::transform(ObjectParser::toArray($rateio));
+        
+        $this->assertEquals(2, count($arr));
+        $this->assertEquals(1, $arr["Municipio_id"]);
+        $this->assertEquals(2, $arr["Conta_id"]);
+    }
 }
 
 class ObjectParserTestComplexObject2 {
@@ -133,6 +171,95 @@ class ObjectParserTestObject {
 
     public function setIdade($idade) {
         $this->idade = $idade;
+        return $this;
+    }
+}
+
+class ContaTestObject extends ModelBase{
+    public $Id;
+    public $Nome;
+
+    public function getNome() {
+        return $this->Nome;
+    }
+
+    public function setNome($Nome) {
+        $this->Nome = $Nome;
+        return $this;
+    }
+    public function getId() {
+        return $this->Id;
+    }
+
+    public function setId($Id) {
+        $this->Id = $Id;
+        return $this;
+    }
+}
+
+class MunicipioTestObject extends ModelBase{
+    public $Id;
+    public $Nome;
+
+    public function getNome() {
+        return $this->Nome;
+    }
+
+    public function setNome($Nome) {
+        $this->Nome = $Nome;
+        return $this;
+    }
+    public function getId() {
+        return $this->Id;
+    }
+
+    public function setId($Id) {
+        $this->Id = $Id;
+        return $this;
+    }
+}
+
+class RateioTestObject extends ModelBase{
+    private $Municipio;
+    private $Municipio_id;
+    private $Conta;
+    private $Conta_id;
+    
+    public function getConta() {
+        return $this->Conta;
+    }
+
+    public function getConta_id() {
+        return $this->Conta_id;
+    }
+
+    public function setConta(ContaTestObject $Conta) {
+        $this->Conta = $Conta;
+        $this->Conta_id = $Conta->Id;
+        return $this;
+    }
+
+    public function setConta_id($Conta_id) {
+        $this->Conta_id = $Conta_id;
+        return $this;
+    }
+
+        public function getMunicipio() {
+        return $this->Municipio;
+    }
+
+    public function getMunicipio_id() {
+        return $this->Municipio_id;
+    }
+
+    public function setMunicipio(MunicipioTestObject $municipio) {
+        $this->Municipio = $municipio;
+        $this->Municipio_id = $municipio->Id;
+        return $this;
+    }
+
+    public function setMunicipio_id($Municipio_id) {
+        $this->Municipio_id = $Municipio_id;
         return $this;
     }
 }
