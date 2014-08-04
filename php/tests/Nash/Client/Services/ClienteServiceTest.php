@@ -82,12 +82,14 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($result->getModel());
         $this->assertInstanceOf("Cliente", $result->getModel());
         $this->assertEquals($cliente->getId(), $result->getModel()->getId());
+        
+        return $result->getModel();
     }
 
     /**
      * @covers Nash\Client\Services\ClienteService::update
      * @param \Nash\Client\Models\Cliente $cliente
-     * @depends testCreate
+     * @depends testRead
      */
     public function testUpdate(Cliente $cliente) {
         $cliente->setNomeFantasia("Test Update!");
@@ -103,7 +105,6 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($cliente->getId(), $result->getModel()->getId());
         
         $result = $this->object->read($cliente->getId());
-
 
         $this->assertEquals(Result::SUCCESS, $result->getStatus());
         $this->assertNotNull($result->getModel());

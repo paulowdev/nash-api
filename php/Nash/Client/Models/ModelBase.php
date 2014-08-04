@@ -60,8 +60,13 @@ class ModelBase {
                 $this->$getter()->loadFromArray($value);
                 $setterValue = $this->$getter();
             } else if (strcmp($parameterTypeName = $this->getParameterClassName($setter), "array")) {
-                $parameterTypeName = $this->getParameterClassName($setter);
-                $setterValue = new $parameterTypeName($value);
+                //$parameterTypeName = $this->getParameterClassName($setter);
+                
+                if (strcmp($parameterTypeName, "undefined")) {
+                    $setterValue = new $parameterTypeName($value);
+                } else {
+                    $setterValue = $value;
+                }
             }
         }
         return $setterValue;
@@ -78,7 +83,8 @@ class ModelBase {
         $parameterClass = $parameter->getClass();
 
         if (!$parameter->isArray() && is_null($parameterClass)) {
-            throw new Exception("O paramentro \"\${$parameter->getName()}\" do metodo \"{$className}->{$setter}\" nao possui um tipo definido!");
+            //throw new Exception("O paramentro \"\${$parameter->getName()}\" do metodo \"{$className}->{$setter}\" nao possui um tipo definido!");
+            return "undefined";
         }
 
         $parameterClassName = $parameter->isArray() ? "array" : $parameterClass->getName();

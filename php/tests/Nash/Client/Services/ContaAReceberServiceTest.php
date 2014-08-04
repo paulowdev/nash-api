@@ -123,7 +123,7 @@ class ContaAReceberServiceTest extends PHPUnit_Framework_TestCase
     
     private function getCentroResultados(){
         $service = new CentroResultadosService($this->session);
-        $result = $service->read(10);
+        $result = $service->read(51);
         //$result = $service->retrieve(1, 0);
         $centroResultados = $result->getModel();
         

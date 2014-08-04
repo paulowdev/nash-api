@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Gean/Documents/Fortes/Nash/API/php/NashClient/Nash/Client/Services/ConfiguracaoEmpresaService.php</file>
-            <file>file:/C:/Users/Gean/Documents/Fortes/Nash/API/php/NashClient/env.php</file>
-            <file>file:/C:/Users/Gean/Documents/Fortes/Nash/API/php/NashClient/Nash/Client/Models/ConfiguracaoEmpresa.php</file>
+            <file>file:/C:/Users/Gean/Documents/Fortes/nashapi/php/tests/Nash/Client/Services/ContaAReceberServiceTest.php</file>
+            <file>file:/C:/Users/Gean/Documents/Fortes/nashapi/php/tests/Nash/Client/Services/AgenteFinanceiroServiceTest.php</file>
+            <file>file:/C:/Users/Gean/Documents/Fortes/nashapi/php/tests/Nash/Client/Services/ClienteServiceTest.php</file>
         </group>
     </open-files>
 </project-private>

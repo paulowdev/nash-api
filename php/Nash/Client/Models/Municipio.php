@@ -51,10 +51,13 @@ class Municipio extends Entidade {
         return $this;
     }
 
-    public function setUF(UF $UF = null) {
-        $this->UF = $UF;
-        if ($UF)
+    public function setUF($UF = null) {
+        if (is_object($UF)) {
             $this->UF_id = $UF->Id;
+            $this->UF = new UF($UF);
+        } else {
+            $this->UF = $UF;
+        }
         return $this;
     }
 

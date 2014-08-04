@@ -183,10 +183,12 @@ class UnidadeNegocio extends EntidadeComCodigo {
         return $this;
     }
 
-    public function setMunicipio(Municipio $Municipio = null) {
-        $this->Municipio = $Municipio;
-        if ($Municipio) {
+    public function setMunicipio($Municipio = null) {
+        if (is_object($Municipio)) {
+            $this->Municipio = new Municipio($Municipio);
             $this->Municipio_id = $Municipio->Id;
+        } else {
+            $this->Municipio = $Municipio;
         }
         return $this;
     }
