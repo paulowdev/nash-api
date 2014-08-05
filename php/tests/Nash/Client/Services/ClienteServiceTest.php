@@ -67,23 +67,23 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
         
         $this->assertEquals(Result::SUCCESS, $result->getStatus());
         $this->assertNotNull($result->getModel());
-        $this->assertInstanceOf("Cliente", $result->getModel());
+        $this->assertGreaterThan(0, $result->getModel()->Id);
         
-        return self::$cliente = $result->getModel();
+        return $result->getModel();
     }
 
     /**
      * @covers Nash\Client\Services\ClienteService::read
      * @depends testCreate
      */
-    public function testRead(Cliente $cliente)
+    public function testRead($cliente)
     {
-        $result = $this->object->read($cliente->getId());
+        $result = $this->object->read($cliente->Id);
         $this->assertNotNull($result->getModel());
         $this->assertInstanceOf("Cliente", $result->getModel());
-        $this->assertEquals($cliente->getId(), $result->getModel()->getId());
+        $this->assertEquals($cliente->Id, $result->getModel()->getId());
         
-        return $result->getModel();
+        return self::$cliente = $result->getModel();
     }
 
     /**
@@ -101,8 +101,7 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(Result::SUCCESS, $result->getStatus());
         $this->assertNotNull($result->getModel());
-        $this->assertInstanceOf("Cliente", $result->getModel());
-        $this->assertEquals($cliente->getId(), $result->getModel()->getId());
+        $this->assertEquals($cliente->getId(), $result->getModel()->Id);
         
         $result = $this->object->read($cliente->getId());
 
@@ -120,9 +119,9 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
      * @covers Nash\Client\Services\ClienteService::delete
      * @depends testCreate
      */
-    public function testDelete(Cliente $cliente)
+    public function testDelete($cliente)
     {
-        $result = $this->object->delete($cliente->getId());
+        $result = $this->object->delete($cliente->Id);
         $this->assertEquals(Result::SUCCESS, $result->getStatus());
     }
     

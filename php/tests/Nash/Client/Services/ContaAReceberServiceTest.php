@@ -43,7 +43,7 @@ class ContaAReceberServiceTest extends PHPUnit_Framework_TestCase
         
         $this->assertEquals(Result::SUCCESS, $result->getStatus());
         $this->assertNotNull($result->getModel());
-        $this->assertInstanceOf("ContaAReceber", $result->getModel());
+        $this->assertGreaterThan(0, $result->getModel()->Id);
         
         return $result->getModel();
     }
@@ -51,8 +51,8 @@ class ContaAReceberServiceTest extends PHPUnit_Framework_TestCase
     /**
      * @depends testCriacaoDeContasAReceber
      */
-    public function testAtualizacaoDeContasAReceber(ContaAReceber $contaAReceber) {
-        $contaAReceberAlterado = $this->object->read($contaAReceber->getId())->getModel();
+    public function testAtualizacaoDeContasAReceber($contaAReceber) {
+        $contaAReceberAlterado = $this->object->read($contaAReceber->Id)->getModel();
         $contaAReceberAlterado->setObservacao("Teste de alteração de contas a receber.");
         $contaAReceberAlterado->getServicos()[0]->Valor = 2000;
         $contaAReceberAlterado->getVencimentos()[0]->Valor = 2000;
@@ -63,7 +63,7 @@ class ContaAReceberServiceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(Result::SUCCESS, $result->getStatus());
         $this->assertNotNull($result->getModel());
         
-        $contaAReceberAlterado = $result->getModel();
+        $contaAReceberAlterado = $this->object->read($result->getModel()->Id)->getModel();
         
         $this->assertInstanceOf("ContaAReceber", $contaAReceberAlterado);
         $this->assertEquals("Teste de alteração de contas a receber.", $contaAReceberAlterado->getObservacao());

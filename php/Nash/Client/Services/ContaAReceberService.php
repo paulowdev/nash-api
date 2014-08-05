@@ -25,7 +25,7 @@ class ContaAReceberService extends AbstractCrudService {
         $json = $entity->toJson();
         
         $result = $this->session->post("/{$this->entityName()}/inclui", $json);        
-        return $this->parseResult($result);
+        return $result;
     }
     
     public function update(Entidade $entity) {
@@ -33,6 +33,6 @@ class ContaAReceberService extends AbstractCrudService {
         $json = $entity->toJson();
         
         $result = $this->session->put("/{$this->entityName()}/altera/{$entity->getId()}", $json);        
-        return $this->parseResult($result);
+        return $result;
     }
 }

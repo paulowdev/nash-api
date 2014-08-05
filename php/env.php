@@ -1,3 +1,3 @@
 <?php
 //development, statement
-return "development";
+return "statement";

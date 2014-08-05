@@ -31,12 +31,12 @@ abstract class AbstractCrudService implements ICrudService {
 
     public function create(Entidade $entity) {
        $result = $this->session->post("/{$this->entityName()}/inclui", ObjectParser::toArray($entity));
-       return $this->parseResult($result);
+       return $result;
     }
 
     public function delete($id) {
        $result = $this->session->delete("/{$this->entityName()}/exclui/{$id}");
-       return $this->parseResult($result);
+       return $result;
     }
 
     public function read($id) {
@@ -55,7 +55,7 @@ abstract class AbstractCrudService implements ICrudService {
 
     public function update(Entidade $entity) {
        $result = $this->session->put("/{$this->entityName()}/altera/{$entity->getId()}", ObjectParser::toArray($entity));
-       return $this->parseResult($result);
+       return $result;
     }
     
     protected function parseResult($result) {
