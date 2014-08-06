@@ -10,6 +10,13 @@ As URLs do serviço são as seguintes:
 	1. Ambiente de Testes: https://srvaramis/nash
 	2. Produção: https://nash.fortesinformatica.com.br
 
+Versão: 20140806100245
+    As seguintes alterações foram feitas:
+        1. Todos os CRUDs passam a retornar somente o Id do objeto quando houver uma inserção ou atualização e não mais o objeto complexo.
+        2. Entidade "Municipio" passa a aceitar para a propriedade UF tanto uma string com o nome da UF quanto um objeto do tipo UF. Esse comportamento deve ser utilizado somente para leitura.
+        3. Entidade Participante passa a aceitar para a propriedade Municipio tanto uma string com o nome do município quanto um objeto do tipo Municipio. Esse comportamento deve ser utilizado somente para leitura.
+        4. Entidade UnidadeNegocio passa a aceitar para a propriedade Municipio tanto uma string com o nome do município quanto um objeto do tipo Municipio. Esse comportamento deve ser utilizado somente para leitura.
+
 Versão: 20140625164130
     Foi feita a adaptação da API para a nova versão do sistema Nash que passa a executar com o Entity Framework.
     
