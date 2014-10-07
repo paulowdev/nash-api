@@ -22,7 +22,12 @@ class ContaAReceberService extends AbstractCrudService {
     
     public function create(Entidade $entity) {
         $this->session->contentType = "application/json";  
-        $json = $entity->toJson();
+        
+        try {
+           $json = $entity->toJson();    
+        } catch (Exception $ex) {
+            var_dump($ex);
+        }
         
         $result = $this->session->post("/{$this->entityName()}/inclui", $json);        
         return $result;

@@ -12,12 +12,11 @@
  * @author elvislima
  */
 class BaixaPendenteVencimentoAReceber {
-
+    
     public $saveActionUrl;
     public $Data;
-    public $ValorNominal;
-    public $Conta;
-    public $Conta_id;
+    public $ValorNominal;    
+    public $ContaId;
     public $Observacao;
     public $VencimentoReceberId;
     public $VencimentoId;
@@ -27,11 +26,11 @@ class BaixaPendenteVencimentoAReceber {
     public $Tarifa;
 
     public function getConta_id() {
-        return $this->Conta_id;
+        return $this->ContaId;
     }
 
     public function setConta_id($Conta_id) {
-        $this->Conta_id = $Conta_id;
+        $this->ContaId = $Conta_id;
         return $this;
     }
 
@@ -92,10 +91,6 @@ class BaixaPendenteVencimentoAReceber {
         return $this->ValorNominal;
     }
 
-    public function getConta() {
-        return $this->Conta;
-    }
-
     public function getObservacao() {
         return $this->Observacao;
     }
@@ -111,13 +106,6 @@ class BaixaPendenteVencimentoAReceber {
 
     public function setValorNominal($ValorNominal) {
         $this->ValorNominal = $ValorNominal;
-        return $this;
-    }
-
-    public function setConta(Conta $Conta) {
-        $this->Conta = $Conta;
-        if ($Conta)
-            $this->Conta_id = $Conta->Id;
         return $this;
     }
 

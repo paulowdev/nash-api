@@ -20,6 +20,10 @@ class VencimentoAReceberService extends AbstractCrudService {
         return "VencimentoAReceber";
     }
     
+    public function leanEntityClassName(){
+        return "VencimentoAbertoAReceber";
+    }
+    
     public function baixar($id, BaixaVencimentoAReceber $baixa) {
        $result = $this->session->put("/{$this->entityName()}/{$id}/salvarBaixa", ObjectParser::toArray($baixa));
        return $this->parseResult($result);
@@ -28,6 +32,6 @@ class VencimentoAReceberService extends AbstractCrudService {
     public function vencimentosEmAberto($take, $skip, $query = "") {
        $q = is_null($query) || empty($query) || !$query ? "" : "q={$query}&";
        $result = $this->session->get("/{$this->entityName()}/FiltroVencimentosEmAberto?{$q}take={$take}&skip={$skip}&page=" . ($skip + 1) . "&pageSize={$take}");
-       return $this->parseListResult($result);
+       return $this->parseListResult($result, $this->leanEntityClassName());
     }    
 }
