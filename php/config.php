@@ -11,10 +11,5 @@ return array (
         "servicePath" => "https://srvaramis/nash",
         "username" => "site",
         "password" => "4321"
-    ),
-    "production" => array(
-        "servicePath" => "http://nash.fortesinformatica.com.br",
-        "username" => "site",
-        "password" => "4321"
     )
 );
