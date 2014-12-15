@@ -19,7 +19,13 @@ class NashEarlySession extends AbstractSession {
     public $contentType = "application/x-www-form-urlencoded";
     
     public function login (array $params) {
-        $this->post("/Home/Login", array("LoginNome" => $params["username"], "Senha" => $params["password"]));
+        $http = $this->getHttpObject(true);
+        $http->cookies = $this->cookies;
+        $http->HTTPRequest("POST", $this->getAuthenticationUrl() . "/Home/LoginApi", array(
+            "Login" => $params["username"],
+            "Senha" => $params["password"],
+            "DeslogarAutomaticamente" => "true"
+        ));
         $this->cookies = $this->getHttpObject()->cookies;
         $this->processLoginResult($params);
     }
@@ -77,7 +83,6 @@ class NashEarlySession extends AbstractSession {
     protected function processLoginResult(array $params) {
         switch($this->getHttpObject()->getStatus()) {
             case 200:
-            case 302:
                 $this->setUsername($params["username"]);
                 $this->setResultCode(ISession::AUTHENTICATION_SUCCESS);
                 break;
@@ -85,6 +90,7 @@ class NashEarlySession extends AbstractSession {
             case 401:
                 $this->setResultCode(ISession::INVALID_CREDENTIAL);
                 break;
+            case 302:
             case 404:
                 $this->setResultCode(ISession::SERVICE_NOT_FOUND);
                 break;

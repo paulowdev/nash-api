@@ -23,7 +23,7 @@ class NashEarlySessionTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new NashEarlySession(self::$config['servicePath']);
+        $this->object = new NashEarlySession(self::$config['authenticationPath'], self::$config['servicePath']);
     }
 
     /**
@@ -55,8 +55,8 @@ class NashEarlySessionTest extends PHPUnit_Framework_TestCase
     }
     
     public function testCodigoDeResultadoQuandoServicoInvalido() {
-        $object = new NashEarlySession(self::$config["servicePath"] . "/XYZ");
-        $object->login(array("username" => "nash", "password" => "xxxxxx"));
+        $object = new NashEarlySession(self::$config["authenticationPath"] . "/XYZ", self::$config["servicePath"]);
+        $object->login(self::$config);
         $this->assertEquals(ISession::SERVICE_NOT_FOUND, $object->getResultCode());
     }
 
@@ -65,7 +65,7 @@ class NashEarlySessionTest extends PHPUnit_Framework_TestCase
           'Exception', 'getaddrinfo failed'
         );
 
-        $object = new NashEarlySession("http://nash12345676543234567.com.br");
+        $object = new NashEarlySession("http://nash12345676543234567.com.br", "http://nash12345676543234567.com.br");
         $object->login(array("username" => "nash", "password" => "xxxxxx"));
     }
 

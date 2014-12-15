@@ -15,10 +15,12 @@ require_once 'ISession.php';
  */
 abstract class AbstractSession implements ISession {
     private $username = null;
+    private $authenticationUrl = null;
     private $serviceUrl = null;
     private $resultCode = ISession::NOT_AUTHENTICATED;
 
-    public function __construct($serviceUrl) {
+    public function __construct($authenticationUrl, $serviceUrl) {
+        $this->authenticationUrl = $authenticationUrl;
         $this->serviceUrl = $serviceUrl;
     }
     
@@ -32,6 +34,10 @@ abstract class AbstractSession implements ISession {
     
     public function getResultCode() {
         return $this->resultCode;
+    }
+    
+    public function getAuthenticationUrl() {
+        return $this->authenticationUrl;
     }
 
     public function getServiceUrl() {

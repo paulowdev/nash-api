@@ -20,6 +20,7 @@ interface ISession {
     function getUsername();
     function isAuthenticated();
     function getResultCode();
+    function getAuthenticationUrl();
     function getServiceUrl();
     function login(array $params);
     function logout();
