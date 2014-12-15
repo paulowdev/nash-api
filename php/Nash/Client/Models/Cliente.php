@@ -17,20 +17,20 @@ class Cliente extends Participante {
 
     public $Codigo;
     public $InscricaoMunicipal;
-    public $Conta;
-    public $Conta_id;
-    public $ContaPadrao;
-    public $ContaPadrao_id;
+//    public $Conta;
+//    public $Conta_id;
+//    public $ContaPadrao;
+//    public $ContaPadrao_id;
     public $RetencaoISS;
 
-    public function getContaPadrao_id() {
-        return $this->ContaPadrao_id;
-    }
-
-    public function setContaPadrao_id($ContaPadrao_id) {
-        $this->ContaPadrao_id = $ContaPadrao_id;
-        return $this;
-    }
+//    public function getContaPadrao_id() {
+//        return $this->ContaPadrao_id;
+//    }
+//
+//    public function setContaPadrao_id($ContaPadrao_id) {
+//        $this->ContaPadrao_id = $ContaPadrao_id;
+//        return $this;
+//    }
 
     public function getRetencaoISS() {
         return $this->RetencaoISS;
@@ -50,9 +50,9 @@ class Cliente extends Participante {
         return $this->InscricaoMunicipal;
     }
 
-    public function getConta() {
-        return $this->Conta;
-    }
+//    public function getConta() {
+//        return $this->Conta;
+//    }
 
     public function getContaPadrao() {
         return $this->ContaPadrao;
@@ -68,19 +68,19 @@ class Cliente extends Participante {
         return $this;
     }
 
-    public function setConta(Conta $Conta = null) {
-        $this->Conta = $Conta;
-        if ($Conta)
-            $this->Conta_id = $Conta->Id;
-        return $this;
-    }
+//    public function setConta(Conta $Conta = null) {
+//        $this->Conta = $Conta;
+//        if ($Conta)
+//            $this->Conta_id = $Conta->Id;
+//        return $this;
+//    }
 
-    public function setContaPadrao(Conta $ContaPadrao = null) {
-        $this->ContaPadrao = $ContaPadrao;
-        if ($ContaPadrao)
-            $this->ContaPadrao_id = $ContaPadrao->Id;
-        return $this;
-    }
+//    public function setContaPadrao(Conta $ContaPadrao = null) {
+//        $this->ContaPadrao = $ContaPadrao;
+//        if ($ContaPadrao)
+//            $this->ContaPadrao_id = $ContaPadrao->Id;
+//        return $this;
+//    }
 
     public function getConta_id() {
         return $this->Conta_id;

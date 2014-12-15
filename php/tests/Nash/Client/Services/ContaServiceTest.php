@@ -48,18 +48,18 @@ class ContaServiceTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf("Conta", $result->getModel()->Data[0]);
     }
     
-    public function testPossoRecuperarContasDoTipoCliente() {
-        $result = $this->object->getContasTipo(10, 0, TipoConta::Cliente);
-        var_dump($result);
-        $this->assertGreaterThan(0, count($result->getModel()->Data));
-    }
+//    public function testPossoRecuperarContasDoTipoCliente() {
+//        $result = $this->object->getContasTipo(10, 0, TipoConta::Cliente);
+//        var_dump($result);
+//        $this->assertGreaterThan(0, count($result->getModel()->Data));
+//    }
     
-    public function testPossoRecuperarContasDoTipoClienteQueSejamAnaliticas() {
-        $result = $this->object->getContasTipo(10, 0, TipoConta::Cliente, "Calculo:" . TipoCalculo::getTitle(TipoCalculo::getType(), TipoCalculo::Analitico));
-        $this->assertGreaterThan(0, count($result->getModel()->Data));
-        
-        foreach ($result->getModel()->Data as $conta) {
-            $this->assertEquals(TipoCalculo::Analitico, $conta->getCalculo());
-        }
-    }
+//    public function testPossoRecuperarContasDoTipoClienteQueSejamAnaliticas() {
+//        $result = $this->object->getContasTipo(10, 0, TipoConta::Cliente, "Calculo:" . TipoCalculo::getTitle(TipoCalculo::getType(), TipoCalculo::Analitico));
+//        $this->assertGreaterThan(0, count($result->getModel()->Data));
+//        
+//        foreach ($result->getModel()->Data as $conta) {
+//            $this->assertEquals(TipoCalculo::Analitico, $conta->getCalculo());
+//        }
+//    }
 }

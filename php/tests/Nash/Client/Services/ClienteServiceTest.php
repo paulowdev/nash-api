@@ -128,12 +128,12 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(Result::SUCCESS, $result->getStatus());
     }
     
-    private function getConta() {
-        $service = new ContaService($this->session);
-        $result = $service->getContasTipo(1, 0, TipoConta::Cliente, "Calculo:Analitico");
-        $conta = $result->getModel()->Data[0];
-        return $conta;
-    }
+//    private function getConta() {
+//        $service = new ContaService($this->session);
+//        $result = $service->getContasTipo(1, 0, TipoConta::Cliente, "Calculo:Analitico");
+//        $conta = $result->getModel()->Data[0];
+//        return $conta;
+//    }
     
     private function getMunicipio() {
         $service = new MunicipioService($this->session);
@@ -151,7 +151,7 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
         
         //lookups
         $cliente->setMunicipio_id($this->getMunicipio()->Id);
-        $cliente->setConta_id($this->getConta()->Id);
+        //$cliente->setConta_id($this->getConta()->Id);
         
         return $cliente;
     }
