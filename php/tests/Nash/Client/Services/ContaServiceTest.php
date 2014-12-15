@@ -24,10 +24,13 @@ class ContaServiceTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->session = new NashEarlySession(self::$config["servicePath"]);
+        $this->session = new NashEarlySession(self::$config["authenticationPath"], self::$config["servicePath"]);
         $this->object = new ContaService($this->session);
-        
         $this->session->login(self::$config);
+        
+        $empresaService = new EmpresaService($this->session);
+        $empresa = $empresaService->getEmpresasSelecionaveis(1, 0)->getModel()->Data[0];
+        $empresaService->selecionaEmpresa($empresa->getId());
     }
 
     /**
@@ -47,6 +50,7 @@ class ContaServiceTest extends PHPUnit_Framework_TestCase
     
     public function testPossoRecuperarContasDoTipoCliente() {
         $result = $this->object->getContasTipo(10, 0, TipoConta::Cliente);
+        var_dump($result);
         $this->assertGreaterThan(0, count($result->getModel()->Data));
     }
     

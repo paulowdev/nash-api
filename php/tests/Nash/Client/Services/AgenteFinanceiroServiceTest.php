@@ -13,9 +13,13 @@ class AgenteFinanceiroServiceTest extends PHPUnit_Framework_TestCase {
     
     protected function setUp()
     {
-        $this->session = new NashEarlySession(self::$config["servicePath"]);
+        $this->session = new NashEarlySession(self::$config["authenticationPath"], self::$config["servicePath"]);
         $this->session->login(self::$config);
         $this->object = new AgenteFinanceiroService($this->session);        
+        
+        $empresaService = new EmpresaService($this->session);
+        $empresa = $empresaService->getEmpresasSelecionaveis(1, 0)->getModel()->Data[0];
+        $empresaService->selecionaEmpresa($empresa->getId());
     }
     
     protected function tearDown()

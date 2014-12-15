@@ -21,7 +21,7 @@ class ConfiguracaoEmpresaServiceTest extends PHPUnit_Framework_TestCase
     
     protected function setUp()
     {
-        $this->session = new NashEarlySession(self::$config['servicePath']);
+        $this->session = new NashEarlySession(self::$config["authenticationPath"], self::$config['servicePath']);
         $this->session->login(self::$config);
         
         $this->object = new ConfiguracaoEmpresaService($this->session);

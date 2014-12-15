@@ -24,7 +24,7 @@ class MunicipioServiceTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->session = new NashEarlySession(self::$config['servicePath']);
+        $this->session = new NashEarlySession(self::$config["authenticationPath"], self::$config['servicePath']);
         $this->object = new MunicipioService($this->session);
         
         $this->session->login(self::$config);

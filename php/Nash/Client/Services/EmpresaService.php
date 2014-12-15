@@ -19,5 +19,20 @@ class EmpresaService extends AbstractCrudService {
     public function entityClassName() {
         return "Empresa";
     }
-
+    
+    public function getEmpresasSelecionaveis($take, $skip, $query = "") {
+        $q = is_null($query) || empty($query) || !$query ? "" : "q={$query}&";
+        $url = "/SelecaoEmpresa/SelecaoDeEmpresa?{$q}take={$take}&skip={$skip}&page=" . ($skip + 1) . "&pageSize={$take}";
+        $url = str_replace("\"", "", $url);
+        
+        $result = $this->session->get($url);
+        
+        return $this->parseListResult($result);
+    }
+    
+    public function selecionaEmpresa($empresaId) {
+        $this->session->contentType = "application/json";
+        $result = $this->session->post("/Home/SelecionaEmpresa", "{empresaId: $empresaId}");
+        return $result;
+    }
 }
