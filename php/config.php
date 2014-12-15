@@ -3,7 +3,7 @@
 return array (
     "running" => require("env.php"),
     "development" => array(
-        "servicePath" => "http://localhost:2140/nash",
+        "servicePath" => "http://localhost:31877",
         "username" => "site",
         "password" => "4321"
     ),

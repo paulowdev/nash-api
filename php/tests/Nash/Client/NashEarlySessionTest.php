@@ -36,7 +36,7 @@ class NashEarlySessionTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers Nash\Client\UserPasswordSession::login
-     * @todo   Implement testLogin().
+     * @todo Implement testLogin().
      */
     public function testLogin()
     {
