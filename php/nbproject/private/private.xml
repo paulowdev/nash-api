@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/elvislima/projetos/nashapi/php/Nash/Client/Services/ContaAReceberService.php</file>
-            <file>file:/C:/Users/elvislima/projetos/nashapi/php/Nash/Client/Models/ModelBase.php</file>
-            <file>file:/C:/Users/elvislima/projetos/nashapi/php/Nash/Client/Util/ArrayEx.php</file>
-            <file>file:/C:/Users/elvislima/projetos/nashapi/php/Nash/Client/Services/BaixaVencimentoAReceberService.php</file>
+            <file>file:/C:/Users/Gean/Documents/Fortes/nashapi/php/Nash/Client/NashEarlySession.php</file>
+            <file>file:/C:/Users/Gean/Documents/Fortes/nashapi/php/Nash/Client/Models/Cliente.php</file>
+            <file>file:/C:/Users/Gean/Documents/Fortes/nashapi/php/tests/Nash/Client/Services/EmpresaServiceTest.php</file>
+            <file>file:/C:/Users/Gean/Documents/Fortes/nashapi/php/tests/Nash/Client/Services/AgenteFinanceiroServiceTest.php</file>
+            <file>file:/C:/Users/Gean/Documents/Fortes/nashapi/php/tests/Nash/Client/Services/ContaServiceTest.php</file>
+            <file>file:/C:/Users/Gean/Documents/Fortes/nashapi/php/tests/Nash/Client/Services/ClienteServiceTest.php</file>
+            <file>file:/C:/Users/Gean/Documents/Fortes/nashapi/php/Nash/Client/Services/EmpresaService.php</file>
         </group>
     </open-files>
 </project-private>

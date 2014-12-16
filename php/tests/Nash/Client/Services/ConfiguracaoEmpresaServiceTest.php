@@ -25,6 +25,10 @@ class ConfiguracaoEmpresaServiceTest extends PHPUnit_Framework_TestCase
         $this->session->login(self::$config);
         
         $this->object = new ConfiguracaoEmpresaService($this->session);
+        
+        $empresaService = new EmpresaService($this->session);
+        $empresa = $empresaService->getEmpresasSelecionaveis(1, 0)->getModel()->Data[0];
+        $empresaService->selecionaEmpresa($empresa->getId());
     }
 
     /**

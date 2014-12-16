@@ -20,11 +20,15 @@ class BaixaVencimentoAReceberService extends AbstractCrudService {
         return "BaixaRealizadaVencimentoAReceber";
     }       
     
-    public function baixar($id, BaixaPendenteVencimentoAReceber $baixa) {                   
-       $this->session->contentType = "application/json";          
-       $baixa->saveActionUrl = "{$this->entityName()}/{$id}/salvarBaixa";          
-       $result = $this->session->put("/{$baixa->saveActionUrl}", $baixa->toJson());       
-       return $this->parseResult($result);
+    public function baixar($id, BaixaPendenteVencimentoAReceber $baixa) {
+        $contentType = $this->session->contentType;
+        $this->session->contentType = "application/json";
+        
+        $baixa->saveActionUrl = "{$this->entityName()}/{$id}/salvarBaixa";          
+        $result = $this->session->put("/{$baixa->saveActionUrl}", $baixa->toJson());       
+        
+        $this->session->contentType = $contentType;
+        return $this->parseResult($result);
     }
     
     public function baixasEfetuadas($idVencimento, $take, $skip, $query = "") {

@@ -31,8 +31,12 @@ class EmpresaService extends AbstractCrudService {
     }
     
     public function selecionaEmpresa($empresaId) {
+        $contentType = $this->session->contentType;
         $this->session->contentType = "application/json";
+        
         $result = $this->session->post("/Home/SelecionaEmpresa", "{empresaId: $empresaId}");
+        
+        $this->session->contentType = $contentType;
         return $result;
     }
 }

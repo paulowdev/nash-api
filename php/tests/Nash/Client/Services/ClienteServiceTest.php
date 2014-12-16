@@ -47,7 +47,7 @@ class ClienteServiceTest extends PHPUnit_Framework_TestCase
     {
         $cliente = self::$cliente;
         if (!is_null($cliente)) {
-            $session = new NashEarlySession(self::$config['servicePath']);
+            $session = new NashEarlySession(self::$config["authenticationPath"], self::$config['servicePath']);
             $session->logout();
             $session->login(self::$config);
             $service = new ClienteService($session);
