@@ -26,21 +26,21 @@ class Participante extends Entidade {
     public $Complemento;
     public $Telefone;
     public $Email;
-    public $GerarConta;
-    public $InformarContaMae;
-    public $ContaMae;
-    public $ContaMae_id;
+//    public $GerarConta;
+//    public $InformarContaMae;
+//    public $ContaMae;
+//    public $ContaMae_id;
     public $NomeFantasia;
     public $RazaoSocial;
 
-    public function getContaMae_id() {
-        return $this->ContaMae_id;
-    }
-
-    public function setContaMae_id($ContaMae_id) {
-        $this->ContaMae_id = $ContaMae_id;
-        return $this;
-    }
+//    public function getContaMae_id() {
+//        return $this->ContaMae_id;
+//    }
+//
+//    public function setContaMae_id($ContaMae_id) {
+//        $this->ContaMae_id = $ContaMae_id;
+//        return $this;
+//    }
 
     public function getParticipanteId() {
         return $this->ParticipanteId;
@@ -82,17 +82,17 @@ class Participante extends Entidade {
         return $this->Email;
     }
 
-    public function getGerarConta() {
-        return $this->GerarConta;
-    }
-
-    public function getInformarContaMae() {
-        return $this->InformarContaMae;
-    }
-
-    public function getContaMae() {
-        return $this->ContaMae;
-    }
+//    public function getGerarConta() {
+//        return $this->GerarConta;
+//    }
+//
+//    public function getInformarContaMae() {
+//        return $this->InformarContaMae;
+//    }
+//
+//    public function getContaMae() {
+//        return $this->ContaMae;
+//    }
 
     public function getNomeFantasia() {
         return $this->NomeFantasia;
@@ -157,22 +157,22 @@ class Participante extends Entidade {
         return $this;
     }
 
-    public function setGerarConta($GerarConta) {
-        $this->GerarConta = $GerarConta;
-        return $this;
-    }
-
-    public function setInformarContaMae($InformarContaMae) {
-        $this->InformarContaMae = $InformarContaMae;
-        return $this;
-    }
-
-    public function setContaMae(Conta $ContaMae = null) {
-        $this->ContaMae = $ContaMae;
-        if ($ContaMae)
-            $this->ContaMae_id = $ContaMae->Id;
-        return $this;
-    }
+//    public function setGerarConta($GerarConta) {
+//        $this->GerarConta = $GerarConta;
+//        return $this;
+//    }
+//
+//    public function setInformarContaMae($InformarContaMae) {
+//        $this->InformarContaMae = $InformarContaMae;
+//        return $this;
+//    }
+//
+//    public function setContaMae(Conta $ContaMae = null) {
+//        $this->ContaMae = $ContaMae;
+//        if ($ContaMae)
+//            $this->ContaMae_id = $ContaMae->Id;
+//        return $this;
+//    }
 
     public function setNomeFantasia($NomeFantasia) {
         $this->NomeFantasia = $NomeFantasia;
