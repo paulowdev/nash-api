@@ -6,11 +6,11 @@ return array (
         "authenticationPath" => "http://localhost:30627",
         "servicePath" => "http://localhost:31877",
         "username" => "site",
-        "password" => "site"
+        "password" => "4321"
     ),
     "statement" => array(
-        "authenticationPath" => "http://nash-comercial.elasticbeanstalk.com:8081",
-        "servicePath" => "http://nash-comercial.elasticbeanstalk.com",
+        "authenticationPath" => "http://nashstaging.elasticbeanstalk.com:8081",
+        "servicePath" => "http://nashstaging.elasticbeanstalk.com",
         "username" => "site",
         "password" => "4321"
     )
