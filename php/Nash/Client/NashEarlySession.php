@@ -83,6 +83,16 @@ class NashEarlySession extends AbstractSession {
     protected function processLoginResult(array $params) {
         switch($this->getHttpObject()->getStatus()) {
             case 200:
+                $this->setChave($this->cookies[".AspNet.ApplicationCookie"]);
+                
+                $http = $this->getHttpObject(true);
+
+                $http->cookies["Camelot.AccountInfo"] = $this->getChave();
+                
+                $http->HTTPRequest("GET", $this->getServiceUrl());
+                
+                $this->cookies = $this->getHttpObject()->cookies;
+                $this->processLoginResult($params);
                 $this->setUsername($params["username"]);
                 $this->setResultCode(ISession::AUTHENTICATION_SUCCESS);
                 break;
