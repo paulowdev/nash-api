@@ -61,12 +61,15 @@ class NashEarlySessionTest extends PHPUnit_Framework_TestCase
     }
 
     public function testCodigoDeResultadoQuandoNaoForPossivelEfetuarAutenticacao() {
-        $this->setExpectedException(
-          'Exception', 'getaddrinfo failed'
-        );
-
-        $object = new NashEarlySession("http://nash12345676543234567.com.br", "http://nash12345676543234567.com.br");
-        $object->login(array("username" => "nash", "password" => "xxxxxx"));
+        $success = true;
+        try {
+            $object = new NashEarlySession("http://nash12345676543234567.com.br", "http://nash12345676543234567.com.br");
+            $object->login(array("username" => "nash", "password" => "xxxxxx"));
+        } catch (Exception $e) {
+            $success = false;
+            $this->assertNotEmpty($e->getMessage());
+        }
+        $this->assertTrue($success);
     }
 
     public function testLogout() {

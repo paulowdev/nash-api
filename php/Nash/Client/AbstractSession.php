@@ -18,6 +18,7 @@ abstract class AbstractSession implements ISession {
     private $authenticationUrl = null;
     private $serviceUrl = null;
     private $resultCode = ISession::NOT_AUTHENTICATED;
+    private $chave = null;
 
     public function __construct($authenticationUrl, $serviceUrl) {
         $this->authenticationUrl = $authenticationUrl;
@@ -43,6 +44,10 @@ abstract class AbstractSession implements ISession {
     public function getServiceUrl() {
         return $this->serviceUrl;
     }
+
+    public function getChave() {
+        return $this->chave;
+    }
     
     protected function setResultCode($code) {
         $this->resultCode = $code;
@@ -50,5 +55,9 @@ abstract class AbstractSession implements ISession {
     
     protected function setUsername($username) {
         $this->username = $username;
+    }
+    
+    protected function setChave($chave) {
+        $this->chave = $chave;
     }
 }
