@@ -69,7 +69,7 @@ class NashEarlySessionTest extends PHPUnit_Framework_TestCase
             $success = false;
             $this->assertNotEmpty($e->getMessage());
         }
-        $this->assertTrue($success);
+        $this->assertFalse($success);
     }
 
     public function testLogout() {

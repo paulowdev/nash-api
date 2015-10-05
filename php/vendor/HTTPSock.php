@@ -168,7 +168,8 @@ class HTTPSock
         $hostPrefix = strcmp($this->service, "https") == 0 ? "ssl://" : "";
         $errorMessage = "";
         $errorCode = null;
-        $this->socket = fsockopen("{$hostPrefix}{$this->numerical_host}", $this->port, $errorCode, $errorMessage);
+        $remotePath = phpversion() < '5.6' ? $this->numerical_host : $this->host;
+        $this->socket = fsockopen("{$hostPrefix}{$remotePath}", $this->port, $errorCode, $errorMessage);
         
         if (!$this->socket) {
             $this->new_error($errorMessage);

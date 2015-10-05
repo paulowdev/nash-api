@@ -22,11 +22,10 @@ class EmpresaService extends AbstractCrudService {
     
     public function getEmpresasSelecionaveis($take, $skip, $query = "") {
         $q = is_null($query) || empty($query) || !$query ? "" : "q={$query}&";
-        $url = "/SelecaoEmpresa/SelecaoDeEmpresa?{$q}take={$take}&skip={$skip}&page=" . ($skip + 1) . "&pageSize={$take}";
+        $url = "/SelecaoEmpresa/EmpresasParaUsuario?{$q}take={$take}&skip={$skip}&page=" . ($skip + 1) . "&pageSize={$take}";
         $url = str_replace("\"", "", $url);
         
         $result = $this->session->get($url);
-        
         return $this->parseListResult($result);
     }
     

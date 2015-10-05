@@ -1,3 +1,3 @@
 <?php
-//development, statement
-return "statement";
+//development, staging
+return "production";

@@ -8,10 +8,16 @@ return array (
         "username" => "site",
         "password" => "4321"
     ),
-    "statement" => array(
+    "staging" => array(
         "authenticationPath" => "http://nashstaging.elasticbeanstalk.com:8081",
         "servicePath" => "http://nashstaging.elasticbeanstalk.com",
         "username" => "site",
         "password" => "4321"
+    ),
+    "production" => array(
+        "authenticationPath" => "https://accounts.fortesinformatica.com.br",
+        "servicePath" => "https://core.fortesinformatica.com.br",
+        "username" => "xxxxxxxxxxx",
+        "password" => "xxxxxxxxxxx"
     )
 );

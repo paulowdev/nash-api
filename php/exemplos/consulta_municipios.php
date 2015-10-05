@@ -2,13 +2,25 @@
 
 require_once '../bootstrap.php';
 
-$servicePath = "http://srvaramis/nash";
-$session = new NashEarlySession($servicePath);
+$config = require('../config.php');
+$config = $config[$config['running']];
+
+$servicePath = $config['servicePath'];
+$authenticationPath = $config['authenticationPath'];
+
+$session = new NashEarlySession($authenticationPath, $servicePath);
 $service = new MunicipioService($session);
+$empresaService = new EmpresaService($session);
 
-$session->login(array("username" => "site", "password" => "4321"));
+$session->login($config);
 
-$result = $service->retrieve(3, 0, "Nome:Fortaleza"); //Terceiro parâmentro de filtro opcional
+$empresa = $empresaService->getEmpresasSelecionaveis(1, 0);//->getModel()->Data[0];
+print_r($empresa); exit;
+$empresaService->selecionaEmpresa($empresa->getId());
+
+$result = $service->retrieve(10, 0); //Terceiro parâmentro de filtro opcional
+print_r($result); exit;
+
 $municipios = $result->getModel()->Data;
 
 echo "Total de Registros: {$result->getModel()->Total}\r\n";
