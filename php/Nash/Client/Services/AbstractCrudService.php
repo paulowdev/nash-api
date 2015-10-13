@@ -68,16 +68,20 @@ abstract class AbstractCrudService implements ICrudService {
     }
     
     protected function parseListResult($result) {
-        $entityName = func_num_args() > 1 ? func_get_arg(1) : $this->entityClassName();       
+        $entityName = func_num_args() > 1 ? func_get_arg(1) : $this->entityClassName();
+        $resultIsArray = is_array($result);
+        $dados = $resultIsArray ? $result : (!is_null($result->getModel()) ? $result->getModel()->Data : $result);
         
-        if (!is_null($result->getModel())) {
-            $dados = $result->getModel()->Data;
+        if (!is_null($dados)) {
             foreach ($dados as $key => $value) {
                 $dados[$key] = new $entityName($value);
             }
-            $result->getModel()->Data = $dados;
+            if (!$resultIsArray) {
+                $result->getModel()->Data = $dados;
+                return $result;
+            }
         }
         
-        return $result;
+        return $dados;
     }
 }

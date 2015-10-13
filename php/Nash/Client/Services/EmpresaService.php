@@ -26,7 +26,7 @@ class EmpresaService extends AbstractCrudService {
         $url = str_replace("\"", "", $url);
         
         $result = $this->session->get($url);
-        return $this->parseListResult($result);
+        return $this->parseListResult($result->getModel()->empresas);
     }
     
     public function selecionaEmpresa($empresaId) {

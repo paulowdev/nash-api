@@ -42,9 +42,9 @@ class EmpresaServiceTest extends PHPUnit_Framework_TestCase {
      */
     public function testGetEmpresasSelecionaveis() {
         $result = $this->object->getEmpresasSelecionaveis(1, 0);
-        $this->assertGreaterThan(0, count($result->getModel()->Data));
+        $this->assertGreaterThan(0, count($result));
         
-        return $result->getModel()->Data[0];
+        return $result[0];
     }
 
     /**

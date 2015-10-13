@@ -19,14 +19,11 @@ class NashEarlySession extends AbstractSession {
     public $contentType = "application/x-www-form-urlencoded";
     
     public function login (array $params) {
-        $http = $this->getHttpObject(true);
-        $http->cookies = $this->cookies;
-        $http->HTTPRequest("POST", $this->getAuthenticationUrl() . "/Home/LoginApi", array(
+        $this->makeRequest($this->getAuthenticationUrl()."/Login?continue=https%3A%2F%2Fcore.fortesinformatica.com.br", "POST", array(
             "Login" => $params["username"],
             "Senha" => $params["password"],
             "DeslogarAutomaticamente" => "true"
         ));
-        $this->cookies = $this->getHttpObject()->cookies;
         $this->processLoginResult($params);
     }
 
@@ -35,9 +32,17 @@ class NashEarlySession extends AbstractSession {
         if ($this->isAuthenticated()) {
             $this->get('/Home/Logout');
             switch($this->getHttpObject()->getStatus()) {
-                case 200: case 302:
+                case 200:
                     $this->clear();
                     $result = true;
+                    break;
+                case 302:
+                    $location = $this->getHttpObject()->headers['Location'];
+                    $this->makeRequest($location, "GET", array());
+                    
+                    $this->clear();
+                    $result = true;
+                    break;
             }
         }
         return $result;
@@ -65,6 +70,13 @@ class NashEarlySession extends AbstractSession {
         $http->HTTPRequest($method, $this->getServiceUrl() . $servicePath, $params);
         return $this->processResult();
     }
+    
+    protected function makeRequest ($url, $method, array $params = array()) {
+        $http = $this->getHttpObject(true);
+        $http->cookies = $this->cookies;
+        $http->HTTPRequest($method, $url, $params);
+        $this->cookies = $this->getHttpObject()->cookies;
+    }
 
     protected function getHttpObject($new = false) {
         $this->httpObject = $new || $this->httpObject == null ? new HTTPSock() : $this->httpObject;
@@ -81,24 +93,28 @@ class NashEarlySession extends AbstractSession {
     
     protected function processLoginResult(array $params) {
         switch($this->getHttpObject()->getStatus()) {
-            case 200:
-                $this->setChave($this->cookies[".FortesId.ApplicationCookie"]);
-                
-                $http = $this->getHttpObject(true);
-
-                $http->cookies["Camelot.AccountInfo"] = $this->getChave();
-                
-                //$http->HTTPRequest("GET", $this->getServiceUrl());
-                //$this->cookies = $this->getHttpObject()->cookies;
-                //$this->processLoginResult($params);
-                $this->setUsername($params["username"]);
-                $this->setResultCode(ISession::AUTHENTICATION_SUCCESS);
-                break;
-            case 301:
-            case 401:
+            case 200: case 401:
                 $this->setResultCode(ISession::INVALID_CREDENTIAL);
                 break;
+            case 301:
             case 302:
+                $http = $this->getHttpObject();
+                $location = $http->headers['Location'];
+                
+                if (strcasecmp("/Home/UsuarioSemEmpresa", trim($location)) === 0) {
+                    $this->setUsername($params["username"]);
+                    $this->setResultCode(ISession::AUTHENTICATION_SUCCESS);
+                    break;
+                } if (strpos($location, 'http') === 0) {
+                    $location = str_replace('http:', 'https:', $location);
+                    $location = str_replace(':80', '', $location);
+                    $this->makeRequest($location, "GET", array());
+                } else {
+                    $this->makeRequest($this->getAuthenticationUrl().$http->headers['Location'], "GET", array());
+                }
+                
+                $this->processLoginResult($params);
+                break;
             case 404:
                 $this->setResultCode(ISession::SERVICE_NOT_FOUND);
                 break;

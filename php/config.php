@@ -17,7 +17,7 @@ return array (
     "production" => array(
         "authenticationPath" => "https://accounts.fortesinformatica.com.br",
         "servicePath" => "https://core.fortesinformatica.com.br",
-        "username" => "xxxxxxxxxxx",
-        "password" => "xxxxxxxxxxx"
+        "username" => "xxxxxxxxx",
+        "password" => "xxxxxxxxx"
     )
 );

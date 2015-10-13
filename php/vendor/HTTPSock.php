@@ -71,10 +71,13 @@ class HTTPSock
 
         $header = $this->assemble_header($HTTP_Type, $this->host, $this->path, $HTTPPostVars, $headers);
         
+        //echo "\r\n\r\nRequest:\r\n============\r\n"; print_r($header);
         fwrite($this->socket, $header);
         //socket_write($this->socket, $header, strlen($header));
 
         $this->read_socket();
+        //echo "\r\n\r\nResponse:\r\n============\r\n"; print_r($this->content);
+        
         $this->parse_header();
 
         if (array_key_exists('Content-Encoding', $this->headers) && $this->headers['Content-Encoding'] == "gzip")
