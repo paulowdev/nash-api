@@ -22,7 +22,7 @@ class NashEarlySession extends AbstractSession {
         $this->makeRequest($this->getAuthenticationUrl()."/Login?continue=https%3A%2F%2Fcore.fortesinformatica.com.br", "POST", array(
             "Login" => $params["username"],
             "Senha" => $params["password"],
-            "DeslogarAutomaticamente" => "true"
+            "fingerprint" => "core-api"
         ));
         $this->processLoginResult($params);
     }
