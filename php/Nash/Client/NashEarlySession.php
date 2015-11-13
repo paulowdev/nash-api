@@ -101,14 +101,16 @@ class NashEarlySession extends AbstractSession {
                 $http = $this->getHttpObject();
                 $location = $http->headers['Location'];
                 
-                if (strcasecmp("/Home/UsuarioSemEmpresa", trim($location)) === 0) {
+                if (strcasecmp("/", trim($location)) === 0) {
                     $this->setUsername($params["username"]);
                     $this->setResultCode(ISession::AUTHENTICATION_SUCCESS);
                     break;
-                } if (strpos($location, 'http') === 0) {
+                } else if (strpos($location, 'http') === 0) {
                     $location = str_replace('http:', 'https:', $location);
                     $location = str_replace(':80', '', $location);
                     $this->makeRequest($location, "GET", array());
+                } else if (strpos(trim($location), '/Home/Autenticar') === 0) {
+                    $this->makeRequest($this->getServiceUrl().$http->headers['Location'], "GET", array());
                 } else {
                     $this->makeRequest($this->getAuthenticationUrl().$http->headers['Location'], "GET", array());
                 }
