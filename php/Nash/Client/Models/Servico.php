@@ -20,6 +20,15 @@ class Servico extends EntidadeComCodigo {
     public $ConfiguracaoSituacaoTributariaISS;
     public $Nome;
 
+    public $BloquearAlteracaoDoServico;
+    public $ComissaoAutomatica;
+    public $Comissoes;
+    public $QtdDeComissoes;
+    public $Servico_id;
+    public $TotalDosPercentuais;
+    public $Valor;
+    public $ValorDasComissoes;
+
     public function getCodigo() {
         return $this->Codigo;
     }

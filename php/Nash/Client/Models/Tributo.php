@@ -22,6 +22,9 @@ class Tributo extends EntidadeComCodigo {
     public $Retem;
     public $NomeTributo;
 
+    public $Valor;
+    public $ValorRetido;
+
     public function getCliente_id() {
         return $this->Cliente_id;
     }

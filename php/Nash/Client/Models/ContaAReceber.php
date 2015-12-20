@@ -28,6 +28,16 @@ class ContaAReceber extends EntidadeComCodigo {
     public $Rateios;
     public $Observacao;
 
+    public $Anotacao;
+    public $Codigo;
+    public $ContabilizadoManualmente;
+    public $Desconto;
+    public $EmitirNotaFiscal;
+    public $Status;
+    public $Valor;
+    public $ValorLiquido;
+    public $ValorRetencao;
+
     public function getCliente_id() {
         return $this->Cliente_id;
     }
