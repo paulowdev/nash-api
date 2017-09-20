@@ -1,14 +1,4 @@
-﻿Pré-requisitos
-    1. PHP 5.1.6 ou superior
-    2. Módulo php "php_sockets" habilitado.
-    3. Módulo php "php_openssl" habilitado.
-    4. Módulo php "php_mbstring" habilitado. Somente para versões do PHP anteriores à 5.2.
-
-A pasta "exemplos" demonstra como a API pode ser utilizada.
-
-As URLs do serviço são as seguintes:
-	1. Ambiente de Testes: https://srvaramis/nash
-	2. Produção: https://nash.fortesinformatica.com.br
+﻿# Core Api Connection Changelog
 
 Versão: 20140806100245
     As seguintes alterações foram feitas:
@@ -62,5 +52,3 @@ Versão: 20140108104937
 
 		4. CRUD de Cliente.
 
-Plugin TeamCity:
-    - https://github.com/badoo/phpunit-testlistener-teamcity
