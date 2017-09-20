@@ -1,7 +1,7 @@
 {
     "name": "fortesinformatica/core-api",
     "description": "A connection pack for fortes core financeiro system.",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
         {
@@ -10,8 +10,6 @@
         }
     ],
     "require-dev": {
-    },
-    "require": {
-        "phpunit/phpunit": "3.7.14"
+        "phpunit/phpunit": "^3.7.0"
     }
 }
