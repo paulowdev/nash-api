@@ -1,7 +1,7 @@
 {
-    "name": "fortesinformatica/core-api",
+    "name": "vidalvasconcelos/core-api",
     "description": "A connection pack for fortes core financeiro system.",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
         {
