@@ -5,8 +5,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "",
-            "email": ""
+            "name": "Vidal Vasconcelos",
+            "email": "vasconcelosvidal@gmail.com"
         }
     ],
     "require-dev": {
@@ -16,5 +16,5 @@
         "psr-4": {
             "Nash\\": "src/"
         }
-    },
+    }
 }
