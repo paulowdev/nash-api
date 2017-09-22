@@ -5,8 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+namespace Nash;
 
-require_once 'AbstractSession.php';
+use Nash\AbstractSession;
 
 /**
  * Description of newPHPClass
@@ -14,9 +15,17 @@ require_once 'AbstractSession.php';
  * @author geanribeiro
  */
 class NashEarlySession extends AbstractSession {
+    
     protected $httpObject = null;
     protected $cookies = array();
+    private $serviceUrl = null;
+    private $authenticationUrl = null;
     public $contentType = "application/x-www-form-urlencoded";
+
+    public function __construct($authenticationUrl, $serviceUrl)
+    {   
+        parent::__construct($authenticationUrl, $serviceUrl);
+    }
     
     public function login (array $params) {
         $this->makeRequest($this->getAuthenticationUrl()."/Login?continue=https%3A%2F%2Fcore.fortesinformatica.com.br", "POST", array(
