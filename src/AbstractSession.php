@@ -7,7 +7,7 @@
  */
 namespace Nash;
 
-use Nash\Isession;
+use Nash\ISession;
 
 /**
  * Description of AbstractSession
