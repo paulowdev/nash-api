@@ -8,6 +8,8 @@
 namespace Nash;
 
 use Nash\AbstractSession;
+use Nash\Isession;
+use Nash\Result;
 
 /**
  * Description of newPHPClass
