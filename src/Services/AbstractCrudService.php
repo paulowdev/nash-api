@@ -1,24 +1,27 @@
 <?php
 
+namespace Nash\Services;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+*/
 
-require_once 'ICrudService.php';
-
-require_once dirname(realpath(__FILE__)) .'/../ISession.php';
-require_once dirname(realpath(__FILE__)) .'/../Models/Entidade.php';
-require_once dirname(realpath(__FILE__)) .'/../Util/ObjectParser.php';
-require_once dirname(realpath(__FILE__)) .'/../Result.php';
+use Nash\Result;
+use Nash\ISession;
+use Nash\Models\Entidade;
+use Nash\Traits\ObjectParseble;
 
 /**
  * Description of AbstractService
  *
  * @author geanribeiro
  */
-abstract class AbstractCrudService implements ICrudService {
+abstract class AbstractCrudService implements ICrudService 
+{
+    use ObjectParseble;
+
     protected $session = null;
     
     public function __construct(ISession $session) {
@@ -30,7 +33,7 @@ abstract class AbstractCrudService implements ICrudService {
     public abstract function entityClassName();
 
     public function create(Entidade $entity) {
-       $result = $this->session->post("/{$this->entityName()}/inclui", ObjectParser::toArray($entity));
+       $result = $this->session->post("/{$this->entityName()}/inclui", $this::toArray($entity));
        return $result;
     }
 
@@ -54,7 +57,7 @@ abstract class AbstractCrudService implements ICrudService {
     }
 
     public function update(Entidade $entity) {
-       $result = $this->session->put("/{$this->entityName()}/altera/{$entity->getId()}", ObjectParser::toArray($entity));
+       $result = $this->session->put("/{$this->entityName()}/altera/{$entity->getId()}", $self::toArray($entity));
        return $result;
     }
     

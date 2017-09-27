@@ -8,8 +8,8 @@ namespace Nash;
  * and open the template in the editor.
  */
 
-use Nash\AbstractSession;
 use Nash\Isession;
+use Nash\AbstractSession;
 use Nash\Util\HTTPSock;
 use Nash\Result;
 
@@ -18,8 +18,8 @@ use Nash\Result;
  *
  * @author geanribeiro
  */
-class NashEarlySession extends AbstractSession {
-    
+class NashEarlySession extends AbstractSession 
+{    
     protected $httpObject = null;
     protected $cookies = array();
     private $serviceUrl = null;
