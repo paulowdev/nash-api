@@ -1,5 +1,7 @@
 <?php
 
+namespace Nash\Util;
+
 /**
 * Class for sending HTTP Requests using raw sockets
 *
@@ -11,6 +13,7 @@
 * @author Joshua Gilman
 * @package HTTPSock
 */
+
 class HTTPSock
 {
     const CONTENT_TYPE_JSON = "application/json";
