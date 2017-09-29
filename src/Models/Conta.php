@@ -1,15 +1,11 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Nash\Models;
 
-require_once dirname(realpath(__FILE__)) . '/EntidadeComCodigo.php';
-require_once dirname(realpath(__FILE__)) . '/TipoConta.php';
-require_once dirname(realpath(__FILE__)) . '/TipoNatureza.php';
-require_once dirname(realpath(__FILE__)) . '/TipoCalculo.php';
+use Nash\Models\TipoConta;
+use Nash\Models\TipoCalculo;
+use Nash\Models\TipoNatureza;
+use Nash\Models\EntidadeComCodigo;
 
 /**
  * Description of Conta

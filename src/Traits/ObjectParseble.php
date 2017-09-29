@@ -1,10 +1,6 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Nash\Traits;
 
 /**
  * Description of ObjectParser
@@ -19,7 +15,7 @@ trait ObjectParseble
         if(is_array($object))
         {
             //TODO:
-        } else if (!ObjectParser::loadArray($object, $result)) {
+        } else if (!$self::loadArray($object, $result)) {
             return $object;
         }
         
@@ -35,7 +31,7 @@ trait ObjectParseble
     private static function loadArray($object, &$result, $prefix = "") {
         $reflect = new ReflectionClass($object);
         $typeName = $reflect->getName();
-        $properties = ObjectParser::getProperties($object);
+        $properties = $self::getProperties($object);
         if (is_array($properties)) {
             foreach ($properties as $key => $prop) {
                 $propertyName = $prop->getName();
@@ -53,7 +49,7 @@ trait ObjectParseble
                 $name = $prefix . $propertyName;
 
                 if (is_object($value)) {
-                    ObjectParser::loadArray($value, $result, "$name.");
+                    $self::loadArray($value, $result, "$name.");
                 } else {
                     $result[$name] = $value;
                 }

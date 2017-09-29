@@ -1,12 +1,9 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Nash\Models;
 
-require_once dirname(realpath(__FILE__)) . '/Participante.php';
+use Nash\Models\Participante;
+use Nash\Models\RetencaoISS;
 
 /**
  * Description of Cliente
@@ -67,20 +64,6 @@ class Cliente extends Participante {
         $this->InscricaoMunicipal = $InscricaoMunicipal;
         return $this;
     }
-
-//    public function setConta(Conta $Conta = null) {
-//        $this->Conta = $Conta;
-//        if ($Conta)
-//            $this->Conta_id = $Conta->Id;
-//        return $this;
-//    }
-
-//    public function setContaPadrao(Conta $ContaPadrao = null) {
-//        $this->ContaPadrao = $ContaPadrao;
-//        if ($ContaPadrao)
-//            $this->ContaPadrao_id = $ContaPadrao->Id;
-//        return $this;
-//    }
 
     public function getConta_id() {
         return $this->Conta_id;

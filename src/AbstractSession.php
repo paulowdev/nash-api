@@ -7,58 +7,69 @@
  */
 namespace Nash;
 
-use Nash\ISession;
+use Nash\SessionInterface;
 
 /**
  * Description of AbstractSession
  *
  * @author geanribeiro
  */
-abstract class AbstractSession implements ISession {
+abstract class AbstractSession implements SessionInterface 
+{
     private $username = null;
     private $authenticationUrl = null;
     private $serviceUrl = null;
-    private $resultCode = ISession::NOT_AUTHENTICATED;
+    private $resultCode = SessionInterface::NOT_AUTHENTICATED;
     private $chave = null;
 
-    public function __construct($authenticationUrl, $serviceUrl) {
+    public function __construct($authenticationUrl, $serviceUrl) 
+    {
         $this->authenticationUrl = $authenticationUrl;
         $this->serviceUrl = $serviceUrl;
     }
     
-    public function getUsername() {
+    public function getUsername() 
+    {
         return $this->username;
     }
 
-    public function isAuthenticated() {
-        return $this->getResultCode() == ISession::AUTHENTICATION_SUCCESS;
+    public function isAuthenticated() 
+    {
+        return $this->getResultCode() == SessionInterface::AUTHENTICATION_SUCCESS;
     }
     
-    public function getResultCode() {
+    public function getResultCode() 
+    {
         return $this->resultCode;
     }
     
-    public function getAuthenticationUrl() {
+    public function getAuthenticationUrl() 
+    {
         return $this->authenticationUrl;
     }
 
-    public function getServiceUrl() {
+    public function getServiceUrl() 
+    {
         return $this->serviceUrl;
     }
 
-    public function getChave() {
+    public function getChave() 
+    {
         return $this->chave;
     }
     
-    protected function setResultCode($code) {
+    protected function setResultCode($code) 
+    {
         $this->resultCode = $code;
     }
     
-    protected function setUsername($username) {
+    protected function setUsername($username) 
+    {
         $this->username = $username;
     }
     
-    protected function setChave($chave) {
+    protected function setChave($chave) 
+    {
         $this->chave = $chave;
     }
 }

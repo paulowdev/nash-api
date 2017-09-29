@@ -1,18 +1,18 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Nash\Models;
+
+use Nash\Models\Cliente;
+use Nash\Models\EntidadeComCodigo;
+use Nash\Models\UnidadeNegocio;
 
 /**
  * Description of Tributo
  *
  * @author elvislima
  */
-class Tributo extends EntidadeComCodigo {
-
+class Tributo extends EntidadeComCodigo 
+{
     public $Cliente;
     public $Cliente_id;
     public $UnidadeNegocio;
@@ -25,80 +25,98 @@ class Tributo extends EntidadeComCodigo {
     public $Valor;
     public $ValorRetido;
 
-    public function getCliente_id() {
+    public function getCliente_id() 
+    {
         return $this->Cliente_id;
     }
 
-    public function getUnidadeNegocio_id() {
+    public function getUnidadeNegocio_id() 
+    {
         return $this->UnidadeNegocio_id;
     }
 
-    public function setCliente_id($Cliente_id) {
+    public function setCliente_id($Cliente_id) 
+    {
         $this->Cliente_id = $Cliente_id;
         return $this;
     }
 
-    public function setUnidadeNegocio_id($UnidadeNegocio_id) {
+    public function setUnidadeNegocio_id($UnidadeNegocio_id) 
+    {
         $this->UnidadeNegocio_id = $UnidadeNegocio_id;
         return $this;
     }
 
-    public function getNomeTributo() {
+    public function getNomeTributo() 
+    {
         return $this->NomeTributo;
     }
 
-    public function setNomeTributo($NomeTributo) {
+    public function setNomeTributo($NomeTributo) 
+    {
         $this->NomeTributo = $NomeTributo;
         return $this;
     }
 
-    public function getCliente() {
+    public function getCliente() 
+    {
         return $this->Cliente;
     }
 
-    public function getUnidadeNegocio() {
+    public function getUnidadeNegocio() 
+    {
         return $this->UnidadeNegocio;
     }
 
-    public function getBase() {
+    public function getBase() 
+    {
         return $this->Base;
     }
 
-    public function getAliquota() {
+    public function getAliquota() 
+    {
         return $this->Aliquota;
     }
 
-    public function getRetem() {
+    public function getRetem() 
+    {
         return $this->Retem;
     }
 
-    public function setCliente(Cliente $Cliente) {
+    public function setCliente(Cliente $Cliente) 
+    {
         $this->Cliente = $Cliente;
-        if ($Cliente) {
+        if ($Cliente) 
+        {
             $this->Cliente_id = $Cliente->Id;
         }
         return $this;
     }
 
-    public function setUnidadeNegocio(UnidadeNegocio $UnidadeNegocio) {
+    public function setUnidadeNegocio(UnidadeNegocio $UnidadeNegocio) 
+    {
         $this->UnidadeNegocio = $UnidadeNegocio;
-        if ($UnidadeNegocio) {
+        if ($UnidadeNegocio) 
+        {
             $this->UnidadeNegocio_id = $UnidadeNegocio->Id;
         }
         return $this;
     }
 
-    public function setBase($Base) {
+    public function setBase($Base) 
+    {
         $this->Base = $Base;
         return $this;
     }
 
-    public function setAliquota($Aliquota) {
+    public function setAliquota($Aliquota) 
+    {
         $this->Aliquota = $Aliquota;
         return $this;
     }
 
-    public function setRetem($Retem) {
+    public function setRetem($Retem) 
+    {
         $this->Retem = $Retem;
         return $this;
     }

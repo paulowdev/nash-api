@@ -2,16 +2,10 @@
 
 namespace Nash;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-use Nash\Isession;
 use Nash\AbstractSession;
-use Nash\Util\HTTPSock;
-use Nash\Result;
+use Nash\Services\HTTPSocketService;
+use Nash\SessionInterface;
+use Nash\Models\Result;
 
 /**
  * Description of newPHPClass
@@ -92,7 +86,7 @@ class NashEarlySession extends AbstractSession
     }
 
     protected function getHttpObject($new = false) {
-        $this->httpObject = $new || $this->httpObject == null ? new HTTPSock() : $this->httpObject;
+        $this->httpObject = $new || $this->httpObject == null ? new HTTPSocketService() : $this->httpObject;
         $this->httpObject->contentType = $this->contentType;
         return $this->httpObject;
     }
@@ -100,14 +94,14 @@ class NashEarlySession extends AbstractSession
     protected function clear() {
         $this->httpObject = null;
         $this->setUsername(null);
-        $this->setResultCode(ISession::NOT_AUTHENTICATED);
+        $this->setResultCode(SessionInterface::NOT_AUTHENTICATED);
         $this->cookies = array();
     }
     
     protected function processLoginResult(array $params) {
         switch($this->getHttpObject()->getStatus()) {
             case 200: case 401:
-                $this->setResultCode(ISession::INVALID_CREDENTIAL);
+                $this->setResultCode(SessionInterface::INVALID_CREDENTIAL);
                 break;
             case 301:
             case 302:
@@ -116,7 +110,7 @@ class NashEarlySession extends AbstractSession
                 
                 if (strcasecmp("/", trim($location)) === 0) {
                     $this->setUsername($params["username"]);
-                    $this->setResultCode(ISession::AUTHENTICATION_SUCCESS);
+                    $this->setResultCode(SessionInterface::AUTHENTICATION_SUCCESS);
                     break;
                 } else if (strpos($location, 'http') === 0) {
                     $location = str_replace('http:', 'https:', $location);
@@ -131,13 +125,13 @@ class NashEarlySession extends AbstractSession
                 $this->processLoginResult($params);
                 break;
             case 404:
-                $this->setResultCode(ISession::SERVICE_NOT_FOUND);
+                $this->setResultCode(SessionInterface::SERVICE_NOT_FOUND);
                 break;
             case 408:
-                $this->setResultCode(ISession::TIMEOUT);
+                $this->setResultCode(SessionInterface::TIMEOUT);
                 break;
             default:
-                $this->setResultCode(ISession::NOT_AUTHENTICATED);
+                $this->setResultCode(SessionInterface::NOT_AUTHENTICATED);
                 break;
         }
     }

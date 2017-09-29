@@ -1,16 +1,8 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Nash\Models;
 
-/**
- * Description of AgenteFinanceiro
- *
- * @author elvislima
- */
+use Nash\Models\EntidadeComCodigo;
 
 class AgenteFinanceiro extends EntidadeComCodigo {    
     

@@ -1,20 +1,19 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Nash\Models;
 
+use Nash\Traits\Arrayable;
 /**
  * Description of ModelBase
  *
  * @author geanribeiro
  */
-class ModelBase {
+class ModelBase 
+{
+    use Arrayable;
 
     public function toJson() {
-        $data = ArrayEx::transform(get_object_vars($this));
+        $data = $self::transform(get_object_vars($this));
         return json_encode($data);
     }
 

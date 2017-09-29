@@ -46,18 +46,18 @@ class NashEarlySessionTest extends PHPUnit_Framework_TestCase
     
     public function testCodigoDeResultadoQuandoLoginBemSucedido() {
         $this->object->login(self::$config);
-        $this->assertEquals(ISession::AUTHENTICATION_SUCCESS, $this->object->getResultCode());
+        $this->assertEquals(SessionInterface::AUTHENTICATION_SUCCESS, $this->object->getResultCode());
     }
     
     public function testCodigoDeResultadoQuandoCredencialFalha() {
         $this->object->login(array("username" => "nash", "password" => "xxxxxx"));
-        $this->assertEquals(ISession::INVALID_CREDENTIAL, $this->object->getResultCode());
+        $this->assertEquals(SessionInterface::INVALID_CREDENTIAL, $this->object->getResultCode());
     }
     
     public function testCodigoDeResultadoQuandoServicoInvalido() {
         $object = new NashEarlySession(self::$config["authenticationPath"] . "/XYZ", self::$config["servicePath"]);
         $object->login(self::$config);
-        $this->assertEquals(ISession::SERVICE_NOT_FOUND, $object->getResultCode());
+        $this->assertEquals(SessionInterface::SERVICE_NOT_FOUND, $object->getResultCode());
     }
 
     public function testCodigoDeResultadoQuandoNaoForPossivelEfetuarAutenticacao() {
@@ -82,6 +82,6 @@ class NashEarlySessionTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->object->isAuthenticated());
         $this->assertTrue($this->object->logout());
         $this->assertNull($this->object->getUsername());
-        $this->assertEquals(ISession::NOT_AUTHENTICATED, $this->object->getResultCode());
+        $this->assertEquals(SessionInterface::NOT_AUTHENTICATED, $this->object->getResultCode());
     }
 }

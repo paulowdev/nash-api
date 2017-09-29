@@ -1,26 +1,26 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Nash\Services;
 
 /**
  * Description of BaixaVencimentoAReceberService
  *
  * @author elvislima
  */
-class BaixaVencimentoAReceberService extends AbstractCrudService {
-    public function entityName() {
+class BaixaVencimentoAReceberService extends AbstractCrudService 
+{
+    public function entityName() 
+    {
         return "vencimentosreceber";
     }
 
-    public function entityClassName() {
+    public function entityClassName() 
+    {
         return "BaixaRealizadaVencimentoAReceber";
     }       
     
-    public function baixar($id, BaixaPendenteVencimentoAReceber $baixa) {
+    public function baixar($id, BaixaPendenteVencimentoAReceber $baixa) 
+    {
         $contentType = $this->session->contentType;
         $this->session->contentType = "application/json";
         

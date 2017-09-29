@@ -1,30 +1,30 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Nash\Services;
 
-require_once 'AbstractCrudService.php';
+use Nash\Models\ConfiguracaoEmpresa;
 
 /**
  * Description of ConfiguracaoEmpresa
  *
  * @author geanribeiro
  */
-class ConfiguracaoEmpresaService extends AbstractCrudService {
-    public function entityClassName() {
-        require_once dirname(realpath(__FILE__)) .'/../Models/ConfiguracaoEmpresa.php';
+class ConfiguracaoEmpresaService extends AbstractCrudService 
+{
+    public function entityClassName() 
+    {
         return "ConfiguracaoEmpresa";
     }
 
-    public function entityName() {
+    public function entityName() 
+    {
         return "configuracaoempresa";
     }
     
-    public function getConfiguracao() {
+    public function getConfiguracao() 
+    {
         $result = $this->session->get("/{$this->entityName()}/inicio");
+        
         return $this->parseResult($result);
     }
 }

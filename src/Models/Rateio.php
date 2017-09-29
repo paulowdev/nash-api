@@ -1,11 +1,11 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Nash\Models;
 
+use Nash\Models\CentroResultados;
+use Nash\Models\Conta;
+use Nash\Models\EntidadeComCodigo;
+use Nash\Models\UnidadeNegocio;
 /**
  * Description of Rateio
  *

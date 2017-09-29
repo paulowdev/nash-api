@@ -1,10 +1,10 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Nash\Models;
+
+use Nash\Models\BaseEnum;
+
+
 
 /**
  * Description of TipoDaSituacaoTributariaISS
@@ -12,7 +12,8 @@
  * @author elvislima
  */
 
-class TipoDaSituacaoTributariaISS extends BaseEnum {
+class TipoDaSituacaoTributariaISS extends BaseEnum 
+{
     const Tributada = 0;
     const Cancelada = 1;
     const Anulada = 2;
@@ -22,7 +23,8 @@ class TipoDaSituacaoTributariaISS extends BaseEnum {
     const Imune = 6;
     const SuspensaoJudicial = 7;
     
-    public static function getType() {
+    public static function getType() 
+    {
         return get_class();
     }
 }

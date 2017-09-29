@@ -1,6 +1,6 @@
 <?php
 
-namespace Nash\Util;
+namespace Nash\Services;
 
 /**
 * Class for sending HTTP Requests using raw sockets
@@ -11,10 +11,10 @@ namespace Nash\Util;
 * given cookie data.
 *
 * @author Joshua Gilman
-* @package HTTPSock
+* @package HTTPSocketService
 */
 
-class HTTPSock
+class HTTPSocketService
 {
     const CONTENT_TYPE_JSON = "application/json";
     const CONTENT_TYPE_FORMURLENCODED = "application/x-www-form-urlencoded";
@@ -26,7 +26,7 @@ class HTTPSock
     public $cookie = NULL;
     public $cookies = NULL;
     
-    public $contentType = HTTPSock::CONTENT_TYPE_FORMURLENCODED;
+    public $contentType = HTTPSocketService::CONTENT_TYPE_FORMURLENCODED;
     
     private $status = NULL;
 
@@ -60,8 +60,6 @@ class HTTPSock
     */
     public function HTTPRequest($HTTP_Type, $webURL, $HTTPPostVars = array(), $headers = array())
     {
-        //$this->new_socket();
-
         list($service, $host, $path, $port) = $this->url_details($webURL);
 
         $this->service = $service;
@@ -74,12 +72,9 @@ class HTTPSock
 
         $header = $this->assemble_header($HTTP_Type, $this->host, $this->path, $HTTPPostVars, $headers);
         
-        //echo "\r\n\r\nRequest:\r\n============\r\n"; print_r($header);
         fwrite($this->socket, $header);
-        //socket_write($this->socket, $header, strlen($header));
 
         $this->read_socket();
-        //echo "\r\n\r\nResponse:\r\n============\r\n"; print_r($this->content);
         
         $this->parse_header();
 
@@ -117,23 +112,6 @@ class HTTPSock
 
         throw new Exception("Socket Error: " . $error_string);
     }
-
-    /**
-    * Creates a new TCP socket using some default values
-    *
-    * This function creates and sets the class socket to
-    * be used when sending and reading data from and to
-    * the socket stream.
-    */
-    //private function new_socket()
-    //{
-    //    $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-    //
-    //    if (!$this->socket)
-    //    {
-    //        $this->new_error(socket_strerror($this->socket));
-    //    }
-    //}
 
     /**
     * Returns the default service port for the requested service
@@ -180,11 +158,6 @@ class HTTPSock
         if (!$this->socket) {
             $this->new_error($errorMessage);
         }
-        
-        //if (!($result = socket_connect($this->socket, $this->numerical_host, $this->port)))
-        //{
-        //    $this->new_error(socket_strerror(socket_last_error()));
-        //}
     }
 
     /**
@@ -242,32 +215,27 @@ class HTTPSock
             $header .= "Cookie: " . $cookie_str . "\r\n";
         }
 
-        //if ($HTTP_Type == "POST")
-        //{
-            if ($this->contentType == HTTPSock::CONTENT_TYPE_FORMURLENCODED) {
-                foreach ($HTTPPostVars as $key => $value)
-                {
-                    if (!is_null($value)) {
-                        $key = urlencode($key);
-                        $value = is_bool($value) ? ($value ? "true" : "false") : urlencode($value);
+        if ($this->contentType == HTTPSocketService::CONTENT_TYPE_FORMURLENCODED) {
+            foreach ($HTTPPostVars as $key => $value)
+            {
+                if (!is_null($value)) {
+                    $key = urlencode($key);
+                    $value = is_bool($value) ? ($value ? "true" : "false") : urlencode($value);
 
-                        if ($value) $postData .= "{$key}={$value}&";
-                    }
+                    if ($value) $postData .= "{$key}={$value}&";
                 }
-
-                $postData = substr($postData, 0, strlen($postData) - 1);
-            } elseif ($this->contentType == HTTPSock::CONTENT_TYPE_JSON) {
-                $postData = str_replace("\/", "/", $HTTPPostVars);
             }
-            
-            if (!is_string($postData)) $postData = "";
 
-            $header .= "Content-Type: {$this->contentType}\r\n";
-            $header .= "Content-Length: " . strlen($postData) . "\r\n\r\n";
-            $header .= $postData;
-        //} else {
-        //    $header .= "\r\n";
-        //}
+            $postData = substr($postData, 0, strlen($postData) - 1);
+        } elseif ($this->contentType == HTTPSocketService::CONTENT_TYPE_JSON) {
+            $postData = str_replace("\/", "/", $HTTPPostVars);
+        }
+        
+        if (!is_string($postData)) $postData = "";
+
+        $header .= "Content-Type: {$this->contentType}\r\n";
+        $header .= "Content-Length: " . strlen($postData) . "\r\n\r\n";
+        $header .= $postData;
 
         return $header;
     }
@@ -340,12 +308,6 @@ class HTTPSock
             $this->content .= fgets($this->socket, 2048);
         }
         fclose($this->socket);
-        
-        //while ($buffer = socket_read($this->socket, 2048))
-        //{
-        //     $this->content .= $buffer;
-        //}
-        //socket_close($this->socket);
         
         return $this->content;
     }

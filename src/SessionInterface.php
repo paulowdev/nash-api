@@ -11,7 +11,8 @@ namespace Nash;
  *
  * @author geanribeiro
  */
-interface ISession {
+interface SessionInterface 
+{
     const AUTHENTICATION_SUCCESS = 1;
     const INVALID_CREDENTIAL = 2;
     const TIMEOUT = 3;

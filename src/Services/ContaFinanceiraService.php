@@ -1,25 +1,23 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Nash\Services;
 
-require_once 'AbstractCrudService.php';
+use Nash\Models\ContaFinanceira;
 
 /**
  * Description of ContaService
  *
  * @author rubensgadelha
  */
-class ContaFinanceiraService extends AbstractCrudService {
-    public function entityName() {
+class ContaFinanceiraService extends AbstractCrudService 
+{
+    public function entityName() 
+    {
         return "contafinanceira";
     }
     
-    public function entityClassName() {
-        require_once dirname(realpath(__FILE__)) .'/../Models/ContaFinanceira.php';
+    public function entityClassName() 
+    {
         return "ContaFinanceira";
     }
 }
