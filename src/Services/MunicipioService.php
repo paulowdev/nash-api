@@ -18,7 +18,7 @@ class MunicipioService extends AbstractCrudService
 
     public function entityClassName() 
     {
-        return "Municipio";
+        return Municipio::class;
     }
 
 }

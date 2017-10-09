@@ -2,6 +2,8 @@
 
 namespace Nash\Services;
 
+use Nash\Models\Banco;
+
 /**
  * Description of BancoService
  *
@@ -11,7 +13,7 @@ class BancoService extends AbstractCrudService
 {
     public function entityName() 
     {
-        return "Banco";
+        return Banco::class;
     }
 
     public function entityClassName() 

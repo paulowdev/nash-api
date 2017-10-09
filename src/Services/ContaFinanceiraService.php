@@ -18,6 +18,6 @@ class ContaFinanceiraService extends AbstractCrudService
     
     public function entityClassName() 
     {
-        return "ContaFinanceira";
+        return ContaFinanceira::class;
     }
 }

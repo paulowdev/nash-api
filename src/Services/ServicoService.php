@@ -2,6 +2,8 @@
 
 namespace Nash\Services;
 
+use Nash\Models\Servico;
+
 /**
  * Description of ServicoService
  *
@@ -16,6 +18,6 @@ class ServicoService extends AbstractCrudService
 
     public function entityClassName() 
     {
-        return "Servico";
+        return Servico:class;
     }
 }

@@ -2,6 +2,10 @@
 
 namespace Nash\Services;
 
+use Nash\Models\ContaAReceber;
+use Nash\Models\Entidade;
+use Nash\Services\AbstractCrudService;
+
 /**
  * Description of ContaAReceberService
  *
@@ -16,7 +20,7 @@ class ContaAReceberService extends AbstractCrudService
 
     public function entityClassName() 
     {
-        return "ContaAReceber";
+        return ContaAReceber::class;
     }
 
     public function create(Entidade $entity) 

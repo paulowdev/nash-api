@@ -18,6 +18,6 @@ class TipoDeDocumentoService extends AbstractCrudService
     
     public function entityClassName() 
     {
-        return "TipoDeDocumento";
+        return TipoDeDocumento::class;
     }
 }

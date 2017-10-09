@@ -2,6 +2,8 @@
 
 namespace Nash\Services;
 
+use Nash\Models\UnidadeNegocio;
+
 /**
  * Description of UnidadeNeogocioService
  *
@@ -16,6 +18,6 @@ class UnidadeNegocioService extends AbstractCrudService
 
     public function entityClassName() 
     {
-        return "UnidadeNegocio";
+        return UnidadeNegocio::class;
     }
 }

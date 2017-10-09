@@ -16,7 +16,7 @@ class Result {
     const SUCCESS = 1;
     const REQUEST_FAIL = 2;
     const ERROR = 3;
-    
+
     private $status;
     private $erros = array();
     private $model = NULL;
@@ -28,7 +28,7 @@ class Result {
         $this->model = $model;
         $this->detail = $detail;
     }
-    
+
     public function getStatus() {
         return $this->status;
     }
@@ -46,7 +46,7 @@ class Result {
         $this->erros = $erros;
         return $this;
     }
-    
+
     public function getModel() {
         return $this->model;
     }
@@ -55,11 +55,11 @@ class Result {
         $this->model = $model;
         return $this;
     }
-    
+
     public function getDetail() {
         return $this->detail;
     }
-    
+
     public function setDetail($detail) {
         $this->detail = $detail;
         return $this;

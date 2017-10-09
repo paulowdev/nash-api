@@ -11,14 +11,14 @@ use Nash\Models\ConfiguracaoEmpresa;
  */
 class ConfiguracaoEmpresaService extends AbstractCrudService 
 {
-    public function entityClassName() 
-    {
-        return "ConfiguracaoEmpresa";
-    }
-
     public function entityName() 
     {
         return "configuracaoempresa";
+    }
+
+    public function entityClassName() 
+    {
+        return ConfiguracaoEmpresa::class;
     }
     
     public function getConfiguracao() 

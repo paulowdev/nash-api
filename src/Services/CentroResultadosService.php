@@ -2,6 +2,9 @@
 
 namespace Nash\Services;
 
+use Nash\Models\CentroResultados;
+use Nash\Services\AbstractCrudService;
+
 /**
  * Description of CentroResultadosService
  *
@@ -16,6 +19,6 @@ class CentroResultadosService extends AbstractCrudService
 
     public function entityClassName() 
     {
-        return "CentroResultados";
+        return CentroResultados::class;
     }
 }

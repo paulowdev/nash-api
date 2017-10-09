@@ -3,6 +3,7 @@
 namespace Nash\Services;
 
 use Nash\Models\Cliente;
+use Nash\Services\AbstractCrudService;
 
 /**
  * Description of ClienteService
@@ -18,7 +19,7 @@ class ClienteService extends AbstractCrudService
 
     public function entityClassName() 
     {
-        return "Cliente";
+        return Cliente::class;
     }
 
 }

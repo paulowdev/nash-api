@@ -2,6 +2,8 @@
 
 namespace Nash\Services;
 
+use Nash\Models\Empresa;
+
 /**
  * Description of EmpresaService
  *
@@ -16,7 +18,7 @@ class EmpresaService extends AbstractCrudService
 
     public function entityClassName() 
     {
-        return "Empresa";
+        return Empresa::class;  
     }
     
     public function getEmpresasSelecionaveis($take, $skip, $query = "") 

@@ -2,6 +2,9 @@
 
 namespace Nash\Services;
 
+use Nash\Models\BaixaRealizadaVencimentoAReceber;
+use Nash\Services\AbstractCrudService;
+
 /**
  * Description of BaixaVencimentoAReceberService
  *
@@ -16,7 +19,7 @@ class BaixaVencimentoAReceberService extends AbstractCrudService
 
     public function entityClassName() 
     {
-        return "BaixaRealizadaVencimentoAReceber";
+        return BaixaRealizadaVencimentoAReceber::class;
     }       
     
     public function baixar($id, BaixaPendenteVencimentoAReceber $baixa) 

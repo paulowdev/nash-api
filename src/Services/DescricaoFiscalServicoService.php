@@ -2,6 +2,8 @@
 
 namespace Nash\Services;
 
+use Nash\Models\DescricaoFiscalServico;
+
 /**
  * Description of DescricaoFiscalServicoService
  *
@@ -16,6 +18,6 @@ class DescricaoFiscalServicoService extends AbstractCrudService
 
     public function entityClassName() 
     {
-        return "DescricaoFiscalServico";
+        return DescricaoFiscalServico::class;
     }
 }

@@ -17,7 +17,7 @@ class ContaService extends AbstractCrudService
     
     public function entityClassName() 
     {
-        return "Conta";
+        return Conta::class;
     }
     
     public function getContasTipo($take, $skip, $tipo, $query = "") 
