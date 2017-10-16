@@ -8,7 +8,7 @@ use Nash\Traits\Arrayable;
  *
  * @author geanribeiro
  */
-class ModelBase 
+class ModelBase
 {
     use Arrayable;
 
@@ -19,7 +19,7 @@ class ModelBase
 
     public function __construct($data = null) {
         if (!is_null($data)) {
-            if ($data instanceof stdClass) {
+            if (is_object($data)) {
                 $this->loadFromStdClass($data);
             } else if (is_array($data)) {
                 $this->loadFromArray($data);
@@ -29,7 +29,8 @@ class ModelBase
         }
     }
 
-    public function loadFromStdClass($data) {
+    public function loadFromStdClass($data)
+    {
         $vars = get_object_vars($data);
         $this->loadFromArray($vars);
     }
@@ -44,7 +45,7 @@ class ModelBase
 
             $methodSet = "set" . ucfirst($property);
             $getter = "get" . ucfirst($property);
-            
+
             if (method_exists($this, $methodSet)) {
                 $setterValue = $this->getValue($getter, $methodSet, $value);
                 $this->$methodSet($setterValue);
@@ -60,7 +61,7 @@ class ModelBase
                 $setterValue = $this->$getter();
             } else if (strcmp($parameterTypeName = $this->getParameterClassName($setter), "array")) {
                 //$parameterTypeName = $this->getParameterClassName($setter);
-                
+
                 if (strcmp($parameterTypeName, "undefined")) {
                     $setterValue = new $parameterTypeName($value);
                 } else {

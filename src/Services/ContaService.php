@@ -8,19 +8,19 @@ use Nash\Models\Conta;
  *
  * @author geanribeiro
  */
-class ContaService extends AbstractCrudService 
+class ContaService extends AbstractCrudService
 {
-    public function entityName() 
+    public function entityName()
     {
         return "conta";
     }
-    
-    public function entityClassName() 
+
+    public function entityClassName()
     {
         return Conta::class;
     }
-    
-    public function getContasTipo($take, $skip, $tipo, $query = "") 
+
+    public function getContasTipo($take, $skip, $tipo, $query = "")
     {
         $q = is_null($query) || empty($query) || !$query ? "" : "q={$query}&";
         $result = $this->session->get("/{$this->entityName()}/{$tipo}/contas?{$q}take={$take}&skip={$skip}&page=" . ($skip + 1) . "&pageSize={$take}");

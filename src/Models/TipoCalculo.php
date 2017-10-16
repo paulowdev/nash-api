@@ -9,12 +9,12 @@ use Nash\Models\BaseEnum;
  *
  * @author geanribeiro
  */
-class TipoCalculo extends BaseEnum 
+class TipoCalculo extends BaseEnum
 {
     const Analitico = 0;
     const Sintetico = 1;
-    
-    public static function getType() 
+
+    public static function getType()
     {
         return get_class();
     }

@@ -9,19 +9,19 @@ use Nash\Models\Empresa;
  *
  * @author elvislima
  */
-class EmpresaService extends AbstractCrudService 
+class EmpresaService extends AbstractCrudService
 {
-    public function entityName() 
+    public function entityName()
     {
         return "empresa";
     }
 
-    public function entityClassName() 
+    public function entityClassName()
     {
-        return Empresa::class;  
+        return Empresa::class;
     }
-    
-    public function getEmpresasSelecionaveis($take, $skip, $query = "") 
+
+    public function getEmpresasSelecionaveis($take, $skip, $query = "")
     {
         $q      = is_null($query) || empty($query) || !$query ? "" : "q={$query}&";
         $url    = "/SelecaoEmpresa/EmpresasParaUsuario?{$q}take={$take}&skip={$skip}&page=" . ($skip + 1) . "&pageSize={$take}";
@@ -30,12 +30,12 @@ class EmpresaService extends AbstractCrudService
 
         return $this->parseListResult($result->getModel()->empresas);
     }
-    
-    public function selecionaEmpresa($empresaId) 
+
+    public function selecionaEmpresa($empresaId)
     {
         $contentType = $this->session->contentType;
         $this->session->contentType = "application/json";
-        
+
         $result = $this->session->post("/Home/SelecionaEmpresa", "{empresaId: $empresaId}");
         $this->session->contentType = $contentType;
 
